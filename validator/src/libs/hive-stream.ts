@@ -28,7 +28,10 @@ async function streamBlocksIntoQueue(client: Client, queue: AsyncQueue<NumberedS
         }
 
         const elementsToStream = Math.min(queue.free, observer.headBlockNum - lastSuccessfullyFetchedBlockNum);
-        utils.log(`Streaming ${elementsToStream} blocks into queue`, LogLevel.Debug);
+        if (elementsToStream > 0){
+            utils.log(`Streaming ${elementsToStream} blocks into queue`, LogLevel.Debug);
+        }
+       
 
         const promises: Promise<NumberedSignedBlock>[] = new Array(elementsToStream)
             .fill(lastSuccessfullyFetchedBlockNum + 1)
