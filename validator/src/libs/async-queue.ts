@@ -75,9 +75,11 @@ export class AsyncQueue<T> extends EventEmitter implements TypedEventEmitter<Eve
     }
 
     public get free() {
+        /*
         if (this.size - this.elements.length < 20){
             return 0;
         }
+            */
         return this.size - this.elements.length;
     }
 }
