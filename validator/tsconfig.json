@@ -17,6 +17,9 @@
         "strictNullChecks": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
+        "skipLibCheck": true,
+        "removeComments": true,
+        "downlevelIteration": false,
         "noImplicitOverride": true
     },
     "references": [
