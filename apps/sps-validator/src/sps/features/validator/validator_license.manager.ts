@@ -13,7 +13,7 @@ import {
     VirtualPayloadSource,
     log,
 } from '@steem-monsters/splinterlands-validator';
-import { inject, injectable, singleton } from 'tsyringe';
+import { inject, singleton } from 'tsyringe';
 import { TOKENS } from '../tokens';
 import { SpsValidatorCheckInRepository } from '../../entities/validator/validator_check_in';
 import { ValidatorCheckInConfig, ValidatorCheckInWatch } from './validator_license.config';
@@ -280,6 +280,15 @@ export class SpsValidatorLicenseManager implements VirtualPayloadSource {
             return undefined;
         }
         return this.getCheckInHash(block.l2_block_id, account);
+    }
+
+    /**
+     * verifies the check in block is within the window based off the current block
+     * @param current_block_num current block number
+     * @param check_in_block_num check in block number
+     */
+    isCheckInBlockWithinWindow(current_block_num: number, check_in_block_num: number) {
+        return current_block_num - check_in_block_num <= this.#checkInConfig!.check_in_window_blocks;
     }
 
     getCheckInHash(block_hash: string, account: string): string {
