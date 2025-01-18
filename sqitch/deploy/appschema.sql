@@ -92,19 +92,23 @@ CREATE TABLE IF NOT EXISTS :APP_SCHEMA.validator_transactions
     prev_block_id character varying(1024) NOT NULL,
     type          character varying(100)  NOT NULL,
     player        character varying(50)   NOT NULL,
-    data          text,
+    data          text compression lz4,
     success       boolean,
     error         text,
     block_num     integer,
+    index         smallint                NOT NULL,
     created_date  timestamp without time zone,
-    result        text,
+    result        text compression lz4,
     CONSTRAINT validator_transactions_pkey PRIMARY KEY (id)
 );
 
 CREATE INDEX IF NOT EXISTS idx_balance_history_created_date ON :APP_SCHEMA.balance_history USING btree (created_date DESC);
 CREATE INDEX IF NOT EXISTS idx_balance_history_player ON :APP_SCHEMA.balance_history USING btree (player);
+CREATE INDEX IF NOT EXISTS balance_history_token_player_type_idx ON :APP_SCHEMA.balance_history USING btree (token ASC NULLS LAST, player ASC NULLS LAST, type ASC NULLS LAST);
+CREATE INDEX IF NOT EXISTS balance_history_player_created_date_idx ON :APP_SCHEMA.balance_history USING btree (player ASC NULLS LAST, created_date ASC NULLS LAST);
+
 CREATE INDEX IF NOT EXISTS validator_transaction_players_player_idx ON :APP_SCHEMA.validator_transaction_players USING btree (player);
-CREATE INDEX IF NOT EXISTS validator_transactions_block_num_idx ON :APP_SCHEMA.validator_transactions USING btree (block_num);
+CREATE INDEX IF NOT EXISTS validator_transactions_block_num_idx ON :APP_SCHEMA.validator_transactions USING btree (block_num, index ASC);
 CREATE INDEX IF NOT EXISTS validator_transactions_created_date_idx ON :APP_SCHEMA.validator_transactions USING btree (created_date);
 CREATE INDEX IF NOT EXISTS validator_transactions_type_player_idx ON :APP_SCHEMA.validator_transactions USING btree (player, type);
 
