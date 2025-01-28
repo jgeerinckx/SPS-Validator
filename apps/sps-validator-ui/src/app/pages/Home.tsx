@@ -1,6 +1,6 @@
 import { Card, CardBody, List, ListItem, Spinner, Typography } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
-import { usePromise } from '../hooks/Promise';
+import { usePromise, usePromiseRefresh } from '../hooks/Promise';
 import { DefaultService } from '../services/openapi';
 import React, { useEffect, useState } from 'react';
 import { Table, TableHead, TableRow, TableColumn, TableBody, TableCell } from '../components/Table';
@@ -29,11 +29,11 @@ function UsefulLinksCard() {
     );
 }
 
-function MetricsCard() {
-    const [spsPrice] = usePromise(() => DefaultService.getPriceForToken('SPS'));
+function useMetricsCard() {
+    const [spsPrice] = usePromiseRefresh(() => DefaultService.getPriceForToken('SPS'), 5000, []);
     // TODO switch to count endpoint
     const [validators] = usePromise(() => DefaultService.getValidators(0, 0));
-    const [status] = usePromise(() => DefaultService.getStatus());
+    const [status] = usePromiseRefresh(() => DefaultService.getStatus(), 5000, []);
 
     const [metrics, setMetrics] = useState<{ label: string; value: string }[]>([]);
     useEffect(() => {
@@ -42,7 +42,13 @@ function MetricsCard() {
             { label: 'Validator Nodes', value: validators?.count?.toString() ?? '...' },
             { label: 'Block Num', value: status?.last_block?.toString() ?? '...' },
         ]);
+
     }, [spsPrice, validators, status]);
+    return metrics;
+}
+
+const MetricsCard = () => {
+    const metrics = useMetricsCard();
 
     return (
         <Card>
