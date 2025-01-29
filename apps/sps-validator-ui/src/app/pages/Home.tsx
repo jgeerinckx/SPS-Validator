@@ -37,13 +37,21 @@ function useMetricsCard() {
 
     const [metrics, setMetrics] = useState<{ label: string; value: string }[]>([]);
     useEffect(() => {
-        setMetrics([
+            const newMetrics = [
             { label: 'SPS Price', value: `$${spsPrice?.price?.toFixed(5) ?? '...'}` },
             { label: 'Validator Nodes', value: validators?.count?.toString() ?? '...' },
             { label: 'Block Num', value: status?.last_block?.toString() ?? '...' },
-        ]);
+        ];
 
+        // Compare previous state to avoid unnecessary re-renders
+        setMetrics((prevMetrics) => 
+            JSON.stringify(prevMetrics) !== JSON.stringify(newMetrics) ? newMetrics : prevMetrics
+    );
+    console.log("spsPrice:", spsPrice);
+    console.log("validators:", validators);
+    console.log("status:", status);
     }, [spsPrice, validators, status]);
+
     return metrics;
 }
 
