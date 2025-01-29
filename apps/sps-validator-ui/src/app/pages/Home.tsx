@@ -46,10 +46,7 @@ function useMetricsCard() {
         // Compare previous state to avoid unnecessary re-renders
         setMetrics((prevMetrics) => 
             JSON.stringify(prevMetrics) !== JSON.stringify(newMetrics) ? newMetrics : prevMetrics
-    );
-    console.log("spsPrice:", spsPrice);
-    console.log("validators:", validators);
-    console.log("status:", status);
+        );
     }, [spsPrice, validators, status]);
 
     return metrics;
