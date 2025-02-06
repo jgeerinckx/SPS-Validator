@@ -14,14 +14,14 @@ const usefulLinks = [
 function UsefulLinksCard() {
     return (
         <Card>
-            <CardBody className="overflow-x-hidden">
-                <Typography variant="h5" color="blue-gray" className="mb-2">
+            <CardBody className="overflow-x-hidden dark:bg-gray-800">
+                <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                     Useful Links
                 </Typography>
                 <List className="p-0 -mx-2 gap-0 min-w-0">
                     {usefulLinks.map((link) => (
                         <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
-                            <ListItem className="rounded-none border-gray-400 border-b-[1px]">{link.name}</ListItem>
+                            <ListItem className="rounded-none border-gray-400 border-b-[1px] hover:bg-blue-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-800">{link.name}</ListItem>
                         </a>
                     ))}
                 </List>
@@ -44,18 +44,18 @@ const MetricsCard = () => {
     const metrics = useMetricsCard();
     return (
         <Card>
-            <CardBody className="flex flex-col items-center justify-around gap-6">
+            <CardBody className="flex flex-col items-center justify-around gap-6 dark:bg-gray-800">
                 {metrics.map((metric, index) => (
                     <React.Fragment key={metric.label}>
                         <div className="text-center">
-                            <Typography color="blue-gray" className="text-2xl">
+                            <Typography color="blue-gray" className="text-2xl dark:text-gray-200">
                                 {metric.value}
                             </Typography>
-                            <Typography color="blue-gray" className="text-md">
+                            <Typography color="blue-gray" className="text-md dark:text-gray-200">
                                 {metric.label}
                             </Typography>
                         </div>
-                        {index < metrics.length - 1 && <div className="w-full h-[1px] border-gray-400 border-b-[1px]"></div>}
+                        {index < metrics.length - 1 && <div className="w-full h-[1px] border-gray-400 border-b-[1px] dark:text-gray-200"></div>}
                     </React.Fragment>
                 ))}
             </CardBody>
@@ -74,26 +74,26 @@ export function TopValidatorsTable(props: TopValidatorsTableProps) {
     }
     const noValidators = result?.validators === undefined || result.validators.length === 0;
     return (
-        <Table className="w-full mt-5 border-2 border-gray-200">
+        <Table className="w-full mt-5 border-2 border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-300">
             <TableHead>
                 <TableRow>
-                    <TableColumn>
-                        <Typography color="blue-gray" className="font-normal text-left">
+                    <TableColumn className="dark:bg-gray-300">
+                        <Typography color="blue-gray" className="font-normal text-left dark:text-gray-800">
                             Validator
                         </Typography>
                     </TableColumn>
-                    <TableColumn>
-                        <Typography color="blue-gray" className="font-normal text-left">
+                    <TableColumn className="dark:bg-gray-300">
+                        <Typography color="blue-gray" className="font-normal text-left dark:text-gray-800">
                             Active
                         </Typography>
                     </TableColumn>
-                    <TableColumn>
-                        <Typography color="blue-gray" className="font-normal text-left">
+                    <TableColumn className="dark:bg-gray-300">
+                        <Typography color="blue-gray" className="font-normal text-left dark:text-gray-800">
                             Missed Blocks
                         </Typography>
                     </TableColumn>
-                    <TableColumn>
-                        <Typography color="blue-gray" className="font-normal text-left">
+                    <TableColumn className="dark:bg-gray-300">
+                        <Typography color="blue-gray" className="font-normal text-left dark:text-gray-800">
                             Total Votes
                         </Typography>
                     </TableColumn>
@@ -105,7 +105,7 @@ export function TopValidatorsTable(props: TopValidatorsTableProps) {
                         <TableCell colSpan={4}>
                             <Typography color="blue-gray" className="text-center">
                                 No validators registered.{' '}
-                                <Link to="/validator-nodes/manage" className="text-blue-600 underline">
+                                <Link to="/validator-nodes/manage" className="text-blue-600 underline dark:text-blue-500">
                                     Register now.
                                 </Link>
                             </Typography>
@@ -114,7 +114,7 @@ export function TopValidatorsTable(props: TopValidatorsTableProps) {
                 )}
                 {!noValidators &&
                     result?.validators?.map((validator) => (
-                        <TableRow key={validator.account_name}>
+                        <TableRow key={validator.account_name} className="dark:border-gray-300">
                             <TableCell>
                                 <span>
                                     <Link to={`/validator-nodes?node=${encodeURIComponent(validator.account_name)}`} className="text-blue-600 underline">
@@ -153,12 +153,12 @@ export function TopSpsHoldersTable(props: TopSpsHoldersTableProps) {
         <Table className={props.className}>
             <TableHead>
                 <TableRow>
-                    <TableColumn>
+                    <TableColumn  className="dark:bg-gray-300">
                         <Typography color="blue-gray" className="font-normal text-left">
                             Player
                         </Typography>
                     </TableColumn>
-                    <TableColumn>
+                    <TableColumn  className="dark:bg-gray-300">
                         <Typography color="blue-gray" className="font-normal text-left">
                             Balance
                         </Typography>
@@ -167,7 +167,7 @@ export function TopSpsHoldersTable(props: TopSpsHoldersTableProps) {
             </TableHead>
             <TableBody>
                 {balances?.balances?.map((balance, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} className="dark:border-gray-300">
                         <TableCell>{balance.player}</TableCell>
                         <TableCell>{balance.balance.toLocaleString()}</TableCell>
                     </TableRow>
@@ -181,15 +181,15 @@ export function Home() {
     return (
         <div className="grid xl:grid-cols-4 gap-6">
             <div className="grid grid-cols-4 col-span-full xl:col-span-3 gap-6 auto-rows-min">
-                <Card className="col-span-full">
+                <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300">
                     <CardBody>
-                        <Typography variant="h5" color="blue-gray" className="mb-2">
+                        <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                             Home
                         </Typography>
                         <Typography variant="paragraph">Welcome to the homepage of the SPS Validator Network.</Typography>
                         <Typography className="mt-3" variant="paragraph">
                             Please visit the{' '}
-                            <Link to="/settings" className="text-blue-600 underline">
+                            <Link to="/settings" className="text-blue-600 underline dark:text-blue-500">
                                 settings
                             </Link>{' '}
                             page and configure your hive account if it's your first time here.
@@ -197,21 +197,21 @@ export function Home() {
                     </CardBody>
                 </Card>
 
-                <Card className="col-span-full">
+                <Card className="col-span-full dark:bg-gray-800">
                     <CardBody>
-                        <Typography variant="h5" color="blue-gray" className="mb-2">
+                        <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                             Top Validators
                         </Typography>
                         <TopValidatorsTable limit={10} />
                     </CardBody>
                 </Card>
 
-                <Card className="col-span-full">
+                <Card className="col-span-full  dark:bg-gray-800">
                     <CardBody>
-                        <Typography variant="h5" color="blue-gray" className="mb-2">
+                        <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                             Top SPS Holders
                         </Typography>
-                        <TopSpsHoldersTable limit={10} className="w-full mt-5 border-2 border-gray-200" />
+                        <TopSpsHoldersTable limit={10} className="w-full mt-5 border-2 border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-300" />
                     </CardBody>
                 </Card>
             </div>

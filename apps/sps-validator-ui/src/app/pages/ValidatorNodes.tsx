@@ -29,50 +29,50 @@ function ValidatorNodesCard({ className, onNodeSelected }: { className?: string;
     return (
         <Card className={className}>
             <CardBody>
-                <Typography variant="h5" color="blue-gray" className="mb-2">
+                <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                     Validators
                 </Typography>
 
                 <form className="mt-4 w-96 flex justify-self-end gap-4" onSubmit={updateSearch}>
-                    <Input value={workingSearch} onChange={(e) => setWorkingSearch(e.target.value)} label="Account" placeholder="Account" className="flex-grow-1" />
-                    <Button className="w-32" type="submit">
+                    <Input value={workingSearch} onChange={(e) => setWorkingSearch(e.target.value)} label="Account" placeholder="Account" className="flex-grow-1 dark:text-gray-300 dark:focus:border-gray-300 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500" labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-300 dark:peer-focus:after:!border-gray-300"}}/>
+                    <Button className="w-32 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100" type="submit">
                         Search
                     </Button>
                 </form>
 
-                <Table className="w-full mt-4 border-2 border-gray-200">
+                <Table className="w-full mt-4 border-2 border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-300">
                     <TableHead>
                         <TableRow>
-                            <TableColumn>
-                                <Typography color="blue-gray" className="font-normal text-left">
+                            <TableColumn className="dark:bg-gray-300">
+                                <Typography color="blue-gray" className="font-normal text-left dark:text-gray-800">
                                     Validator
                                 </Typography>
                             </TableColumn>
-                            <TableColumn>
-                                <Typography color="blue-gray" className="font-normal text-left">
+                            <TableColumn className="dark:bg-gray-300">
+                                <Typography color="blue-gray" className="font-normal text-left dark:text-gray-800">
                                     Active
                                 </Typography>
                             </TableColumn>
-                            <TableColumn>
-                                <Typography color="blue-gray" className="font-normal text-left">
+                            <TableColumn className="dark:bg-gray-300">
+                                <Typography color="blue-gray" className="font-normal text-left dark:text-gray-800">
                                     Missed Blocks
                                 </Typography>
                             </TableColumn>
-                            <TableColumn>
-                                <Typography color="blue-gray" className="font-normal text-left">
+                            <TableColumn className="dark:bg-gray-300">
+                                <Typography color="blue-gray" className="font-normal text-left dark:text-gray-800">
                                     Total Votes
                                 </Typography>
                             </TableColumn>
-                            <TableColumn />
+                            <TableColumn  className="dark:bg-gray-300"/>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {noValidators && (
-                            <TableRow>
+                            <TableRow className="dark:border-gray-300">
                                 <TableCell colSpan={4}>
-                                    <Typography color="blue-gray" className="text-center">
+                                    <Typography color="blue-gray" className="text-center dark:text-gray-800">
                                         No validators registered. You can register your validator{' '}
-                                        <Link to="/validator-nodes/manage" className="text-blue-600 underline">
+                                        <Link to="/validator-nodes/manage" className="text-blue-600 underline dark:text-blue-500">
                                             here.
                                         </Link>
                                     </Typography>
@@ -80,7 +80,7 @@ function ValidatorNodesCard({ className, onNodeSelected }: { className?: string;
                             </TableRow>
                         )}
                         {result?.validators?.map((validator) => (
-                            <TableRow key={validator.account_name}>
+                            <TableRow key={validator.account_name}  className="dark:border-gray-300">
                                 <TableCell>
                                     <span>
                                         {validator.account_name} (
@@ -96,7 +96,7 @@ function ValidatorNodesCard({ className, onNodeSelected }: { className?: string;
                                 <TableCell>{validator.missed_blocks.toLocaleString()}</TableCell>
                                 <TableCell>{validator.total_votes.toLocaleString()}</TableCell>
                                 <TableCell>
-                                    <Button onClick={() => onNodeSelected?.(validator.account_name)} size="sm">
+                                    <Button onClick={() => onNodeSelected?.(validator.account_name)} size="sm" className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100">
                                         View
                                     </Button>
                                 </TableCell>
@@ -121,7 +121,7 @@ export function ValidatorNodes() {
     };
     return (
         <div className="grid grid-cols-8 gap-6 auto-rows-min">
-            <ValidatorNodesCard className="col-span-full" onNodeSelected={selectNode} />
+            <ValidatorNodesCard className="col-span-full dark:bg-gray-800" onNodeSelected={selectNode} />
             <Dialog className="dialog" open={hasSelectedNode} handler={() => setSearchParams({ node: '' })}>
                 <DialogHeader>
                     <Typography variant="h5" color="blue-gray">

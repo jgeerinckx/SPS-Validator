@@ -106,17 +106,17 @@ export function TablePager(props: TablePagerProps) {
 
     return (
         <div className={`flex items-center gap-4 ${props.className ?? ''}`}>
-            <Button variant="text" className="flex items-center gap-2" onClick={prev} disabled={props.page === 0}>
+            <Button variant="text" className="flex items-center gap-2 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100" onClick={prev} disabled={props.page === 0}>
                 <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
             </Button>
             <div className="flex items-center gap-2">
                 {pageNumbers.map((page) => (
-                    <IconButton key={page} {...getItemProps(page)}>
+                    <IconButton key={page} {...getItemProps(page)} className={`${props.page === page ? "dark:bg-blue-800 " : "dark:bg-transparent dark:hover:text-gray-100 dark:hover:bg-blue-600"}  dark:border dark:border-gray-300 dark:text-gray-300`}>
                         {page + 1}
                     </IconButton>
                 ))}
             </div>
-            <Button variant="text" className="flex items-center gap-2" onClick={next} disabled={props.page === pageCount - 1}>
+            <Button variant="text" className="flex items-center gap-2 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100" onClick={next} disabled={props.page === pageCount - 1}>
                 Next
                 <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
             </Button>
