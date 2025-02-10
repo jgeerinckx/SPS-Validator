@@ -5,6 +5,7 @@ import { DefaultService } from '../services/openapi';
 import React from 'react';
 import { Table, TableHead, TableRow, TableColumn, TableBody, TableCell } from '../components/Table';
 import { useMetrics } from '../context/MetricsContext';
+import useSpinnerColor from '../hooks/SpinnerColor'
 
 const usefulLinks = [
     { name: 'Splinterlands', url: 'https://splinterlands.com' },
@@ -69,8 +70,10 @@ export type TopValidatorsTableProps = {
 
 export function TopValidatorsTable(props: TopValidatorsTableProps) {
     const [result, isLoading] = usePromise(() => DefaultService.getValidators(props.limit), [props.limit]);
+    const spinnerColor = useSpinnerColor("blue");
+
     if (isLoading) {
-        return <Spinner className="w-full" />;
+        return <Spinner className="w-full dark:text-gray-500 " color={spinnerColor} />
     }
     const noValidators = result?.validators === undefined || result.validators.length === 0;
     return (
@@ -103,7 +106,7 @@ export function TopValidatorsTable(props: TopValidatorsTableProps) {
                 {noValidators && (
                     <TableRow>
                         <TableCell colSpan={4}>
-                            <Typography color="blue-gray" className="text-center">
+                            <Typography color="blue-gray" className="text-center dark:text-gray-300">
                                 No validators registered.{' '}
                                 <Link to="/validator-nodes/manage" className="text-blue-600 underline dark:text-blue-500">
                                     Register now.
@@ -146,20 +149,21 @@ export type TopSpsHoldersTableProps = {
 
 export function TopSpsHoldersTable(props: TopSpsHoldersTableProps) {
     const [balances, isLoading] = usePromise(() => DefaultService.getBalancesByToken('SPS', props.limit), [props.limit]);
+    const spinnerColor = useSpinnerColor("blue");
     if (isLoading) {
-        return <Spinner className="w-full" />;
+        return <Spinner className="w-full dark:text-gray-500 " color={spinnerColor} />
     }
     return (
         <Table className={props.className}>
             <TableHead>
                 <TableRow>
-                    <TableColumn  className="dark:bg-gray-300">
-                        <Typography color="blue-gray" className="font-normal text-left">
+                    <TableColumn className="dark:bg-gray-300">
+                        <Typography color="blue-gray" className="font-normal text-left dark:text-gray-800">
                             Player
                         </Typography>
                     </TableColumn>
-                    <TableColumn  className="dark:bg-gray-300">
-                        <Typography color="blue-gray" className="font-normal text-left">
+                    <TableColumn className="dark:bg-gray-300">
+                        <Typography color="blue-gray" className="font-normal text-left dark:text-gray-800">
                             Balance
                         </Typography>
                     </TableColumn>

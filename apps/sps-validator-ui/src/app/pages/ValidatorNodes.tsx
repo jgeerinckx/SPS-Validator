@@ -6,6 +6,7 @@ import { DefaultService } from '../services/openapi';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ValidatorVotesTable } from '../components/ValidatorVotesTable';
 import { ValidatorStatsTable } from '../components/ValidatorStatsTable';
+import useSpinnerColor from '../hooks/SpinnerColor'
 
 function ValidatorNodesCard({ className, onNodeSelected }: { className?: string; onNodeSelected?: (node: string) => void }) {
     const [page, setPage] = useState(0);
@@ -13,6 +14,7 @@ function ValidatorNodesCard({ className, onNodeSelected }: { className?: string;
     const [search, setSearch] = useState('');
     const [count, isLoadingCount] = usePromise(() => DefaultService.getValidators(0, 0), [search]);
     const [result, isLoading] = usePromise(() => DefaultService.getValidators(limit, page * limit, search), [search, page, limit]);
+    const spinnerColor = useSpinnerColor("blue")
 
     const [workingSearch, setWorkingSearch] = useState('');
     const updateSearch = (event: FormEvent<HTMLFormElement>) => {
@@ -22,7 +24,7 @@ function ValidatorNodesCard({ className, onNodeSelected }: { className?: string;
     };
 
     if (isLoading || isLoadingCount) {
-        return <Spinner className="w-full" />;
+        return <Spinner className="w-full" color={spinnerColor}/>;
     }
 
     const noValidators = result?.validators === undefined || result.validators.length === 0;
