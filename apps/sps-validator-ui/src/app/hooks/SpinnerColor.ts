@@ -5,16 +5,7 @@ function useSpinnerColor(defaultColor: color = "blue") {
   const [spinnerColor, setSpinnerColor] = useState<color| undefined>(undefined);
 
   useEffect(() => {
-    const updateColor = () => {
-      setSpinnerColor(document.documentElement.classList.contains("dark") ? defaultColor : undefined);
-    };
-
-    updateColor();
-
-    const observer = new MutationObserver(updateColor);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-
-    return () => observer.disconnect();
+    setSpinnerColor(document.documentElement.classList.contains("dark") ? defaultColor : undefined);
   }, [defaultColor]);
 
   return spinnerColor;

@@ -26,7 +26,7 @@ import { ManageValidatorNode } from './pages/ManageValidatorNode';
 import { ManageVotes } from './pages/ManageVotes';
 import { MetricsProvider } from './context/MetricsContext';
 import { useMetrics } from './context/MetricsContext';
-import { DarkModeProvider, useDarkMode } from './context/DarkModeContext';
+import { DarkModeProvider } from './context/DarkModeContext';
 
 function AppRoutes() {
     return (
@@ -136,19 +136,6 @@ function useTickers() {
     return tickers;
 }
 
-export function DarkModeToggle() {
-    const { darkMode, toggleDarkMode } = useDarkMode(); // Get dark mode state & toggle function
-
-    return (
-        <button 
-            onClick={toggleDarkMode} 
-            className="p-2 dark:bg-gray-800 dark:text-gray-300 rounded-md"
-        >
-            {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-        </button>
-    );
-}
-
 export function App() {
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
     useEffect(() => {
@@ -173,9 +160,6 @@ function AppContent({ mobileSidebarOpen, setMobileSidebarOpen}: { mobileSidebarO
     const tickers = useTickers(); 
     return (
         <div className="h-screen w-full flex flex-col">
-            <div>
-                <DarkModeToggle />
-            </div>
             <AppNavbar tickers={tickers} toggleSidebar={() => setMobileSidebarOpen((prev) => !prev)} />
             <div className="flex-grow flex relative dark:bg-gray-900">
                 <AppSidebar isMobileOpen={mobileSidebarOpen}>
