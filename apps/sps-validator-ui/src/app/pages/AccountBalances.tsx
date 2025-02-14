@@ -9,7 +9,7 @@ import { Table, TableBody, TableCell, TableColumn, TableHead, TableRow } from '.
 export function AccountBalancesCard({ account }: { account: string }) {
     const [balances, loading] = usePromise(() => DefaultService.getBalances(account), [account]);
     return (
-        <Card className="dark:bg-gray-800 dark:text-gray-300">
+        <Card className="dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
             <CardBody>
                 <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                     Account Balances for {account}
@@ -52,7 +52,7 @@ export function AccountBalances() {
 
     return (
         <div className="flex flex-col gap-4">
-            <Card className="dark:bg-gray-800 dark:text-gray-300">
+            <Card className="dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                 <CardBody>
                     <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                         Account Balances
@@ -61,7 +61,7 @@ export function AccountBalances() {
 
                     <form className="mt-4 flex gap-4 2xl:max-w-96 2xl:w-1/4 lg:w-2/3 md:w-full" onSubmit={setAccountInParams}>
                         <Input value={account} onChange={(e) => setAccount(e.target.value)} label="Account" placeholder="Account" className="flex-grow-1 dark:text-gray-300 dark:focus:border-gray-300 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500" labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-300 dark:peer-focus:after:!border-gray-300"}} />
-                        <Button className="w-32 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100" type="submit">
+                        <Button className="w-32 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" type="submit">
                             Lookup
                         </Button>
                     </form>

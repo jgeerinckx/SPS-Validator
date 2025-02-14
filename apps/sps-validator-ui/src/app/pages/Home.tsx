@@ -14,8 +14,8 @@ const usefulLinks = [
 ];
 function UsefulLinksCard() {
     return (
-        <Card>
-            <CardBody className="overflow-x-hidden dark:bg-gray-800">
+        <Card className="overflow-x-hidden dark:bg-gray-800 dark:shadow-none">
+            <CardBody>
                 <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                     Useful Links
                 </Typography>
@@ -44,8 +44,8 @@ function useMetricsCard() {
 const MetricsCard = () => {
     const metrics = useMetricsCard();
     return (
-        <Card>
-            <CardBody className="flex flex-col items-center justify-around gap-6 dark:bg-gray-800">
+        <Card className="flex flex-col items-center justify-around gap-6 dark:bg-gray-800 dark:shadow-none">
+            <CardBody>
                 {metrics.map((metric, index) => (
                     <React.Fragment key={metric.label}>
                         <div className="text-center">
@@ -185,7 +185,7 @@ export function Home() {
     return (
         <div className="grid xl:grid-cols-4 gap-6">
             <div className="grid grid-cols-4 col-span-full xl:col-span-3 gap-6 auto-rows-min">
-                <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300">
+                <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                     <CardBody>
                         <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                             Home
@@ -201,7 +201,7 @@ export function Home() {
                     </CardBody>
                 </Card>
 
-                <Card className="col-span-full dark:bg-gray-800">
+                <Card className="col-span-full dark:bg-gray-800 dark:shadow-none">
                     <CardBody>
                         <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                             Top Validators
@@ -210,7 +210,7 @@ export function Home() {
                     </CardBody>
                 </Card>
 
-                <Card className="col-span-full  dark:bg-gray-800">
+                <Card className="col-span-full dark:bg-gray-800 dark:shadow-none">
                     <CardBody>
                         <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                             Top SPS Holders

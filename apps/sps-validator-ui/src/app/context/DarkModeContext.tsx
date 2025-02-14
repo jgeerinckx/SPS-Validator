@@ -6,7 +6,6 @@ interface DarkModeContextProps {
 }
 
 export const DarkModeContext = createContext<DarkModeContextProps | undefined>(undefined);
-//export const DarkModeContext = createContext<{ darkMode: boolean; toggleDarkMode: () => void } | undefined>(undefined);
 
 export const DarkModeProvider = ({ children }: { children: React.ReactNode }) => {
     const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -18,8 +17,6 @@ export const DarkModeProvider = ({ children }: { children: React.ReactNode }) =>
             // If no preference, check system preference
             return window.matchMedia("(prefers-color-scheme: dark)").matches;
         }
-    
-        //return localStorage.getItem("displayMode") === "dark";
     });
 
     useEffect(() => {

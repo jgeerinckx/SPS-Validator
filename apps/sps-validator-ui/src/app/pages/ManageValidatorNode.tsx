@@ -13,7 +13,7 @@ function LoadingCard() {
     const spinnerColor = useSpinnerColor("blue")
     return (
         <div className="flex justify-center">
-            <Card className="dark:bg-gray-800 dark:text-gray-300">
+            <Card className="dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                 <CardBody>
                     <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-300">
                         Please wait
@@ -31,7 +31,7 @@ function LoadingCard() {
 function ErrorCard({ error, retry }: { error: Error; retry: () => void }) {
     return (
         <div className="flex justify-center">
-            <Card className="dark:bg-gray-800 dark:text-gray-300">
+            <Card className="dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                 <CardBody>
                     <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-300">
                         Error
@@ -41,7 +41,7 @@ function ErrorCard({ error, retry }: { error: Error; retry: () => void }) {
                     </div>
                     <CardFooter>
                         <div className="flex items-center justify-end">
-                            <Button onClick={retry} className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100">Retry</Button>
+                            <Button onClick={retry} className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none">Retry</Button>
                         </div>
                     </CardFooter>
                 </CardBody>
@@ -85,7 +85,7 @@ function RegisterCard({ account, registered }: { account: string; registered: ()
 
     return (
         <div className="flex justify-center">
-            <Card className="2xl:w-1/3 lg:w-2/3 md:w-full dark:bg-gray-800 dark:text-gray-300">
+            <Card className="2xl:w-1/3 lg:w-2/3 md:w-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                 <CardBody>
                     <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                         Register Validator Node - {account}
@@ -118,7 +118,7 @@ function RegisterCard({ account, registered }: { account: string; registered: ()
                         </Typography>
                     )}
                     <div className="flex items-center justify-end">
-                        <Button className="flex flex-row items-center dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100" variant="filled" disabled={progress} onClick={register}>
+                        <Button className="flex flex-row items-center dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" variant="filled" disabled={progress} onClick={register}>
                             {progress && <Spinner className="me-3 text-sm" color={spinnerColor}/>}
                             Register
                         </Button>
@@ -166,7 +166,7 @@ function ManageCard({ account, validator, reloadValidator }: { account: string; 
     return (
         <div className="grid xl:grid-cols-4 gap-6">
             <div className="grid grid-cols-4 col-span-full xl:col-span-3 gap-6 auto-rows-min">
-                <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300">
+                <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                     <CardBody>
                         <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                             Validator Node Stats - {account}
@@ -174,7 +174,7 @@ function ManageCard({ account, validator, reloadValidator }: { account: string; 
                         <ValidatorStatsTable validator={validator} className="w-full mt-4" />
                     </CardBody>
                 </Card>
-                <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300">
+                <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                     <CardBody>
                         <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                             Votes On Your Validator Node - {account}
@@ -184,7 +184,7 @@ function ManageCard({ account, validator, reloadValidator }: { account: string; 
                 </Card>
             </div>
             <div className="grid grid-cols-1 col-span-full xl:col-span-1 gap-6 auto-rows-min">
-                <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300">
+                <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                     <CardBody>
                         <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                             Manage Validator Node - {account}
@@ -219,7 +219,7 @@ function ManageCard({ account, validator, reloadValidator }: { account: string; 
                             </Typography>
                         )}
                         <div className="flex items-center justify-end">
-                            <Button className="flex flex-row items-center dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100" variant="filled" disabled={progress} onClick={update}>
+                            <Button className="flex flex-row items-center dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" variant="filled" disabled={progress} onClick={update}>
                                 {progress && <Spinner className="me-3 text-sm" color={spinnerColor}/>}
                                 Update
                             </Button>

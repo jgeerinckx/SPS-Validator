@@ -111,7 +111,7 @@ export function TablePager(props: TablePagerProps) {
             </Button>
             <div className="flex items-center gap-2">
                 {pageNumbers.map((page) => (
-                    <IconButton key={page} {...getItemProps(page)} className={`${props.page === page ? "dark:bg-blue-800 " : "dark:bg-transparent dark:hover:text-gray-100 dark:hover:bg-blue-600"}  dark:border dark:border-gray-300 dark:text-gray-300`}>
+                    <IconButton key={page} {...getItemProps(page)} className={`${props.page === page ? "dark:bg-blue-800 " : "dark:bg-transparent dark:hover:text-gray-100 dark:hover:bg-blue-600"}  dark:border dark:border-gray-300 dark:text-gray-300 dark:shadow-none`}>
                         {page + 1}
                     </IconButton>
                 ))}

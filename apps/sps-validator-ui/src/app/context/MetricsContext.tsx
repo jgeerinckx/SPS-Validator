@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { DefaultService } from '../services/openapi/services/DefaultService'; // Adjust the import path
-import { usePromiseRefresh, usePromise } from '../hooks/Promise'; // Adjust the import path
+import { DefaultService } from '../services/openapi/services/DefaultService';
+import { usePromiseRefresh, usePromise } from '../hooks/Promise';
 
 // Define the data type for context
 interface MetricsContextType {

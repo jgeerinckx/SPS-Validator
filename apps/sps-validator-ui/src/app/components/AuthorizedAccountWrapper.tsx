@@ -60,7 +60,7 @@ export function AuthorizedAccountWrapper(props: AuthorizedAccountWrapperProps) {
         return (
             <div className="flex flex-col gap-4">
                 <div className="flex justify-end">
-                    <Button variant="outlined" onClick={reauthorize} className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100">
+                    <Button variant="outlined" onClick={reauthorize} className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none">
                         Switch Account ({account})
                     </Button>
                 </div>
@@ -70,7 +70,7 @@ export function AuthorizedAccountWrapper(props: AuthorizedAccountWrapperProps) {
     } else {
         return (
             <div className="flex justify-center">
-                <Card className="2xl:w-1/3 lg:w-2/3 md:w-full dark:bg-gray-800 dark:text-gray-300">
+                <Card className="2xl:w-1/3 lg:w-2/3 md:w-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                     <CardBody>
                         <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                             {props.title} - Authorize Account
@@ -104,7 +104,7 @@ export function AuthorizedAccountWrapper(props: AuthorizedAccountWrapperProps) {
                             </Typography>
                         )}
                         <div className="flex items-center justify-end">
-                            <Button className="flex flex-row items-center dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100" variant="filled" disabled={!workingAccount || progress} onClick={authorize}>
+                            <Button className="flex flex-row items-center dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" variant="filled" disabled={!workingAccount || progress} onClick={authorize}>
                                 {progress && <Spinner className="me-3 text-sm dark:border-gray-300 dark:border-t-transparent" color={spinnerColor}/>}
                                 Authorize
                             </Button>

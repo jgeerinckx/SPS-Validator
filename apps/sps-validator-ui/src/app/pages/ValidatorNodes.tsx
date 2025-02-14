@@ -37,7 +37,7 @@ function ValidatorNodesCard({ className, onNodeSelected }: { className?: string;
 
                 <form className="mt-4 w-96 flex justify-self-end gap-4" onSubmit={updateSearch}>
                     <Input value={workingSearch} onChange={(e) => setWorkingSearch(e.target.value)} label="Account" placeholder="Account" className="flex-grow-1 dark:text-gray-300 dark:focus:border-gray-300 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500" labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-300 dark:peer-focus:after:!border-gray-300"}}/>
-                    <Button className="w-32 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100" type="submit">
+                    <Button className="w-32 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" type="submit">
                         Search
                     </Button>
                 </form>
@@ -98,7 +98,7 @@ function ValidatorNodesCard({ className, onNodeSelected }: { className?: string;
                                 <TableCell>{validator.missed_blocks.toLocaleString()}</TableCell>
                                 <TableCell>{validator.total_votes.toLocaleString()}</TableCell>
                                 <TableCell>
-                                    <Button onClick={() => onNodeSelected?.(validator.account_name)} size="sm" className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100">
+                                    <Button onClick={() => onNodeSelected?.(validator.account_name)} size="sm" className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none">
                                         View
                                     </Button>
                                 </TableCell>
@@ -123,7 +123,7 @@ export function ValidatorNodes() {
     };
     return (
         <div className="grid grid-cols-8 gap-6 auto-rows-min">
-            <ValidatorNodesCard className="col-span-full dark:bg-gray-800" onNodeSelected={selectNode} />
+            <ValidatorNodesCard className="col-span-full dark:bg-gray-800 dark:shadow-none" onNodeSelected={selectNode} />
             <Dialog className="dialog" open={hasSelectedNode} handler={() => setSearchParams({ node: '' })}>
                 <DialogHeader>
                     <Typography variant="h5" color="blue-gray">

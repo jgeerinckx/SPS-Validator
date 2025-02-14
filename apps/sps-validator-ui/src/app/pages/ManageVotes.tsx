@@ -55,7 +55,7 @@ function VoteCard({ account, votes, config, reloadVotes }: { account: string; vo
     const noValidators = result?.validators === undefined || result.validators.length === 0;
 
     return (
-        <Card className="dark:bg-gray-800 dark:text-gray-300">
+        <Card className="dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
             <CardBody>
                 <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                     Vote for Validator - {account}
@@ -69,7 +69,7 @@ function VoteCard({ account, votes, config, reloadVotes }: { account: string; vo
 
                 <form className="mt-4 w-96 flex justify-self-end gap-4" onSubmit={updateSearch}>
                     <Input value={workingSearch} onChange={(e) => setWorkingSearch(e.target.value)} label="Account" placeholder="Account" className="flex-grow-1 dark:text-gray-300 dark:focus:border-gray-300 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500" labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-300 dark:peer-focus:after:!border-gray-300"}} />
-                    <Button className="w-32 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100" type="submit">
+                    <Button className="w-32 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" type="submit">
                         Search
                     </Button>
                 </form>
@@ -128,7 +128,7 @@ function VoteCard({ account, votes, config, reloadVotes }: { account: string; vo
                                         disabled={votes.some((v) => v.validator === validator.account_name) || progress}
                                         onClick={() => voteFor(validator.account_name)}
                                         size="sm"
-                                        className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100"
+                                        className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none"
                                     >
                                         Vote
                                     </Button>
@@ -169,7 +169,7 @@ function MyVotesCard({ account, votes, config, reloadVotes }: { account: string;
         }
     };
     return (
-        <Card className="dark:bg-gray-800 dark:text-gray-300">
+        <Card className="dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
             <CardBody>
                 <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                     My Votes - {account}
@@ -198,7 +198,7 @@ function MyVotesCard({ account, votes, config, reloadVotes }: { account: string;
                                 <TableCell>{vote.validator}</TableCell>
                                 <TableCell>{vote.vote_weight}</TableCell>
                                 <TableCell>
-                                    <Button className="flex flex-row items-center dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100" disabled={progress} onClick={() => removeVote(vote.validator)}>
+                                    <Button className="flex flex-row items-center dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" disabled={progress} onClick={() => removeVote(vote.validator)}>
                                         {progress && <Spinner className="me-3 text-sm" color={spinnerColor} />}
                                         Remove
                                     </Button>
@@ -228,7 +228,7 @@ export function ManageVotes() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {!loaded && !error && <Spinner className="w-full col-span-full" color={spinnerColor} />}
                 {error && (
-                    <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300">
+                    <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                         <CardBody>
                             <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                                 Error
@@ -239,7 +239,7 @@ export function ManageVotes() {
                         </CardBody>
                         <CardFooter>
                             <div className="flex flex-row justify-end gap-4">
-                                <Button onClick={reloadAll} size="sm" className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100">
+                                <Button onClick={reloadAll} size="sm" className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none">
                                     Retry
                                 </Button>
                             </div>

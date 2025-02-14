@@ -58,7 +58,7 @@ function TokenBalancesTab({ token }: { token: string }) {
 
 export function TokenBalances() {
     return (
-        <Card className="dark:bg-gray-800 dark:text-gray-300">
+        <Card className="dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
             <CardBody>
                 <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                     Token Balances
