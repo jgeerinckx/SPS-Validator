@@ -124,22 +124,22 @@ export function ValidatorNodes() {
     return (
         <div className="grid grid-cols-8 gap-6 auto-rows-min">
             <ValidatorNodesCard className="col-span-full dark:bg-gray-800 dark:shadow-none" onNodeSelected={selectNode} />
-            <Dialog className="dialog" open={hasSelectedNode} handler={() => setSearchParams({ node: '' })}>
+            <Dialog className="dialog dark:text-gray-300 dark:bg-gray-800 dark:shadow-none" open={hasSelectedNode} handler={() => setSearchParams({ node: '' })}>
                 <DialogHeader>
-                    <Typography variant="h5" color="blue-gray">
+                    <Typography variant="h5" color="blue-gray" className="dark:text-gray-200">
                         Validator Node - {selectedNode}
                     </Typography>
                 </DialogHeader>
-                <DialogBody>
+                <DialogBody className="dark:text-gray-300">
                     <div className="grid grid-cols-1 gap-4">
                         <div>
-                            <Typography variant="h6" color="blue-gray">
+                            <Typography variant="h6" color="blue-gray" className="dark:text-gray-200">
                                 Stats
                             </Typography>
                             <ValidatorStatsTable validator={selectedNode!} className="w-full mt-3" />
                         </div>
                         <div>
-                            <Typography variant="h6" color="blue-gray">
+                            <Typography variant="h6" color="blue-gray" className="dark:text-gray-200">
                                 Votes
                             </Typography>
                             <ValidatorVotesTable account={selectedNode!} className="w-full mt-3" />
