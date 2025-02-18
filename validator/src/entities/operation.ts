@@ -11,6 +11,7 @@ import { payout } from '../utilities/token_support';
 const posting_auth_actions = [
     'token_award',
     'stake_tokens',
+    'stake_tokens_multi',
     'unstake_tokens',
     'claim_staking_rewards',
     'cancel_unstake_tokens',
@@ -22,6 +23,9 @@ const posting_auth_actions = [
     'fulfill_promise_multi',
     'activate_license',
     'deactivate_license',
+    'validate_block',
+    'check_in_validator',
+    'price_feed',
 ];
 
 // TODO: Return instantiated action, or null
