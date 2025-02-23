@@ -27,6 +27,7 @@ import { ManageVotes } from './pages/ManageVotes';
 import { MetricsProvider } from './context/MetricsContext';
 import { useMetrics } from './context/MetricsContext';
 import { DarkModeProvider } from './context/DarkModeContext';
+import { useMediaQuery } from "react-responsive";
 
 function AppRoutes() {
     return (
@@ -137,16 +138,15 @@ function useTickers() {
 }
 
 export function App() {
+    const isDesktop = useMediaQuery({ minWidth: 961 });
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+    
+    // Close sidebar when switching to desktop view
     useEffect(() => {
-        const listener = () => {
-            if (window.innerWidth > 960) {
-                setMobileSidebarOpen(false);
-            }
-        };
-        window.addEventListener('resize', listener);
-        return () => window.removeEventListener('resize', listener);
-    }, []);
+        if (isDesktop) {
+        setMobileSidebarOpen(false);
+        }
+    }, [isDesktop]);
     
     return (
         <DarkModeProvider>
@@ -165,7 +165,7 @@ function AppContent({ mobileSidebarOpen, setMobileSidebarOpen}: { mobileSidebarO
                 <AppSidebar isMobileOpen={mobileSidebarOpen}>
                     <AppSidebarItems closeSidebar={() => setMobileSidebarOpen(false)} />
                 </AppSidebar>
-                <div className="flex-grow p-5">
+                <div className="flex-grow pt-5 sm:p-5 w-full">
                     <AppRoutes />
                 </div>
             </div>

@@ -70,13 +70,13 @@ export function AuthorizedAccountWrapper(props: AuthorizedAccountWrapperProps) {
     } else {
         return (
             <div className="flex justify-center">
-                <Card className="2xl:w-1/3 lg:w-2/3 md:w-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
+                <Card className="2xl:w-2/5 md:w-2/3 sm:w-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                     <CardBody>
                         <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                             {props.title} - Authorize Account
                         </Typography>
                         <Typography variant="paragraph">Authorize your Hive Account to use this page.</Typography>
-                        <form className="mt-8 flex flex-col gap-6">
+                        <form className="mt-8 gap-6 max-w-[400px]">
                             <div>
                                 <Input
                                     size="lg"

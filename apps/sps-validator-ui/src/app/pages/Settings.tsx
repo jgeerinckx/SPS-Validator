@@ -62,7 +62,7 @@ export function Settings() {
 
     return (
         <div className="flex justify-center">
-            <Card className="2xl:w-1/3 lg:w-2/3 md:w-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
+            <Card className="2xl:w-1/3 lg:w-2/3 sm:w-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                 <CardBody>
                     <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                         Settings

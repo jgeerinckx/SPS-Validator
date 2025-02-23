@@ -90,13 +90,13 @@ function RegisterCard({ account, registered }: { account: string; registered: ()
                     <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                         Register Validator Node - {account}
                     </Typography>
-                    <Typography variant="paragraph">
+                    <Typography variant="paragraph" className="dark:text-gray-300">
                         Register your validator node to join the network. You can install it from{' '}
                         <a href="https://github.com/TheSPSDAO/SPS-Validator" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline dark:text-blue-500">
                             here.
                         </a>
                     </Typography>
-                    <form className="mt-8 flex flex-col gap-6">
+                    <form className="mt-8 flex flex-col gap-6 w-full sm:max-w-[400px]">
                         <div>
                             <Input
                                 size="lg"
@@ -164,8 +164,8 @@ function ManageCard({ account, validator, reloadValidator }: { account: string; 
     };
 
     return (
-        <div className="grid xl:grid-cols-4 gap-6">
-            <div className="grid grid-cols-4 col-span-full xl:col-span-3 gap-6 auto-rows-min">
+        <div className="grid 2xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-4 col-span-full 2xl:col-span-3 gap-6 auto-rows-min">
                 <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                     <CardBody>
                         <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
@@ -183,7 +183,7 @@ function ManageCard({ account, validator, reloadValidator }: { account: string; 
                     </CardBody>
                 </Card>
             </div>
-            <div className="grid grid-cols-1 col-span-full xl:col-span-1 gap-6 auto-rows-min">
+            <div className="grid grid-cols-1 col-span-full 2xl:col-span-1 gap-6 auto-rows-min">
                 <Card className="col-span-full dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
                     <CardBody>
                         <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
