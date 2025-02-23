@@ -1,20 +1,35 @@
 # SPS Validator
-## Getting started with Docker
 
 You need to re-build the validator when getting started or when updating to a newer release.
 
-### Prerequisites:
+## Easy Install (mac or linux only):
+Easy install will run through the setup steps for you, but requires the following to be installed on your machine:
+
+- [curl](https://curl.se/download.html) installed. curl will most likely already be installed or available on your linux distros package manager, so try googling "install curl on {distro}" if you don't already have it.
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed.
+- [docker](https://docs.docker.com/desktop/setup/install/mac-install/) installed if you are on mac.
+
+Run the following in a bash shell in your home directory once the above are installed. It will run through an interactive setup where you can define your validator account / key and then start the validator.
+```
+sudo bash <(curl -s https://raw.githubusercontent.com/TheSPSDAO/SPS-Validator/refs/tags/latest/install.sh)
+```
+
+You should still look through the manual setup steps so you understand how to stop/start your node.
+
+## Getting started with Docker (manual setup)
+
+### Manual Setup Prerequisites:
 
 - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed
 - Make sure you have `docker`, `docker-compose` and either wget or curl installed. (`./run.sh install_docker` and `./run.sh preinstall` on Linux)
 - Copy .env-example to .env (`cp .env-example .env`) and change it accordingly
 - _(Optional)_ Either add `validator-data-latest.zip` into the `sqitch` folder or have it downloaded in the build step.
 
-### Setup Instructions
+### Manual Setup Instructions
 
 - `git clone https://github.com/TheSPSDAO/SPS-Validator.git` : Clone the repository
 - `cd SPS-Validator`  : Change directory to the validator repository
-- _(Note)_            : If you're on Windows, use PowerShell and replace `./run.sh` with `./run.ps1` in all the commands. You may need to set your execution policy (`set-executionpolicy remotesigned` from an Administrator instance of powershell).
+- _(Note)_            : If you're on Windows, use PowerShell and replace `./run.sh` with `./run.ps1` in all the commands. You may need to set your execution policy (`set-executionpolicy remotesigned` from an Administrator instance of powershell). Windows is not officially supported yet and it is recommended to use WSL instead.
 - `./run.sh stop`     : Ensure the validator is not currently running.
 - `./run.sh build`    : Build the validator.  This will deploy the database, run migrations and also download/deploy the snapshot.
 - _(Note)_: If you receive an error like `Got permission denied while trying to connect to the Docker daemon socket`, follow the steps [here](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user).
@@ -26,7 +41,7 @@ You need to re-build the validator when getting started or when updating to a ne
 
 - Set the `VALIDATOR_ACCOUNT` and `VALIDATOR_KEY` (posting key) environment variables in your .env file
 - If you've already started your node, run `./run.sh rebuild_service validator` to apply the new environment variables
-- Go to the management ui, http://localhost:8888/validator-nodes/manage, and follow the registration steps. Post URL is NOT required.
+- Go to the management ui, http://localhost:8888/validator-nodes/manage, and follow the registration steps. Post URL is NOT required. If you want to direct your rewards to another account (block validation and license rewards), you can set the reward account for your node during registration.
 - _(Note)_ If you have just restored from a snapshot, you will have to wait until your node catches up before your UI will see you as registered. You can use the shared management UI here which will most likely be caught up: https://thespsdao.github.io/SPS-Validator/validator-nodes/manage.
 - _(Note)_ The first time you register, your node will be set to "inactive", and you will not be considered for block validation.
 - After you've registered and your local node is caught up, you can set your node to active on the Manage Validator Node page.
