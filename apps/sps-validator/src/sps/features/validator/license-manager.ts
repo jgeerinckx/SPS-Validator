@@ -51,6 +51,11 @@ export class SpsValidatorLicenseManager implements VirtualPayloadSource {
     }
 
     async process(block: BlockRef, trx?: Trx): Promise<ProcessResult[]> {
+        if (this.#checkInConfig === undefined) {
+            log('Invalid check in config. Ignoring check in expiration.', LogLevel.Warning);
+            return [];
+        }
+
         const expiredBlockNum = this.getExpiredBlockNum(block.block_num);
         const expiredCheckIns = await this.checkInRepository.countExpired(expiredBlockNum, trx);
         if (expiredCheckIns === 0) {
@@ -187,17 +192,20 @@ export class SpsValidatorLicenseManager implements VirtualPayloadSource {
             };
         }
 
+        const poolPaused = block_num < this.#checkInConfig.paused_until_block;
+
         const checkIn = await this.checkInRepository.getByAccount(account, trx);
         const activatedLicenses = await this.balanceRepository.getBalance(account, TOKENS.ACTIVATED_LICENSE, trx);
         if (!checkIn) {
             return {
                 account,
-                can_check_in: activatedLicenses > 0,
+                can_check_in: !poolPaused && activatedLicenses > 0,
                 is_valid: false,
             };
         }
 
-        const canCheckIn = activatedLicenses > 0 && block_num - checkIn.last_check_in_block_num >= this.#checkInConfig!.check_in_interval_blocks;
+        const canCheckIn = activatedLicenses > 0 && !poolPaused && block_num - checkIn.last_check_in_block_num >= this.#checkInConfig!.check_in_interval_blocks;
+
         return {
             account,
             can_check_in: canCheckIn,
@@ -210,6 +218,8 @@ export class SpsValidatorLicenseManager implements VirtualPayloadSource {
     async checkIn(action: IAction, account: string, trx?: Trx) {
         if (this.#checkInConfig === undefined) {
             log('Invalid check in config. Ignoring check in.', LogLevel.Warning);
+            return [];
+        } else if (this.#checkInConfig.paused_until_block > action.op.block_num) {
             return [];
         }
 
@@ -243,9 +253,15 @@ export class SpsValidatorLicenseManager implements VirtualPayloadSource {
         return block_num - this.#checkInConfig!.check_in_window_blocks - this.#checkInConfig!.check_in_interval_blocks;
     }
 
-    private async expireCheckIn(account: string, action: IAction, trx?: Trx) {
+    public async expireCheckIn(account: string, action: IAction, trx?: Trx) {
+        const checkIn = await this.checkInRepository.getByAccount(account, trx);
+        if (!checkIn) {
+            return [];
+        }
+
         const results: EventLog[] = [];
 
+        // set inactive
         results.push(await this.checkInRepository.setInactive(account, trx));
 
         // unstake from the pool
@@ -288,6 +304,9 @@ export class SpsValidatorLicenseManager implements VirtualPayloadSource {
      * @param check_in_block_num check in block number
      */
     isCheckInBlockWithinWindow(current_block_num: number, check_in_block_num: number) {
+        if (!this.#checkInConfig) {
+            return false;
+        }
         return current_block_num - check_in_block_num <= this.#checkInConfig!.check_in_window_blocks;
     }
 

@@ -189,12 +189,24 @@ export class TopPriceFeedWrapper implements PriceFeedProducer {
     constructor(private readonly source: PriceFeedProducer, private readonly validatorRepository: ValidatorRepository, private readonly watcher: ValidatorWatch) {}
 
     async addPriceEntry(pe: PriceEntry, trx?: Trx): Promise<EventLog[]> {
-        const top = await this.getTopValidators(trx);
-        if (top.some((ve) => ve.account_name === pe.validator)) {
+        if (!this.switchedOver(pe)) {
             return this.source.addPriceEntry(pe, trx);
         } else {
-            return [];
+            const top = await this.getTopValidators(trx);
+            if (top.some((ve) => ve.account_name === pe.validator)) {
+                return this.source.addPriceEntry(pe, trx);
+            } else {
+                return [];
+            }
         }
+    }
+
+    private switchedOver(pe: PriceEntry) {
+        if (!this.watcher.validator) {
+            return false;
+        }
+        const startBlock = Math.max(this.watcher.validator.reward_start_block, this.watcher.validator.paused_until_block);
+        return pe.block_num >= startBlock;
     }
 
     private async getTopValidators(trx?: Trx) {

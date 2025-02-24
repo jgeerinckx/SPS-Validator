@@ -13,6 +13,7 @@ type DisapproveValidatorPayload = {
 type RegisterPayload = {
     is_active: boolean;
     post_url: string | null;
+    reward_account: string | null;
 };
 
 const NO_HIVE_KEYCHAIN_EXTENSION_ERROR_MESSAGE = 'Hive Keychain extension is not installed, or not available to this page.';
@@ -35,7 +36,7 @@ export class HiveService {
                 return reject(new Error(NO_HIVE_KEYCHAIN_EXTENSION_ERROR_MESSAGE));
             }
 
-            window.hive_keychain.requestSignBuffer(account, 'auth_check', 'Active', (result) => {
+            window.hive_keychain.requestSignBuffer(account, `auth_check${Date.now()}`, 'Active', (result) => {
                 resolve(result.success);
             });
         });

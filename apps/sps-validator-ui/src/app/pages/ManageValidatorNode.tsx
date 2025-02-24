@@ -52,6 +52,7 @@ function ErrorCard({ error, retry }: { error: Error; retry: () => void }) {
 
 function RegisterCard({ account, registered }: { account: string; registered: () => void }) {
     const [postUrl, setPostUrl] = useState('');
+    const [rewardAccount, setRewardAccount] = useState('');
     const [error, setError] = useState('');
     const [progress, setProgress] = useState(false);
     const spinnerColor = useSpinnerColor("teal")
@@ -64,6 +65,7 @@ function RegisterCard({ account, registered }: { account: string; registered: ()
                 {
                     is_active: false,
                     post_url: postUrl,
+                    reward_account: rewardAccount === '' ? null : rewardAccount,
                 },
                 account,
             );
@@ -109,6 +111,16 @@ function RegisterCard({ account, registered }: { account: string; registered: ()
                                 labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-300 dark:peer-focus:after:!border-gray-300"}}
                             />
                         </div>
+                        <div>
+                            <Input
+                                size="lg"
+                                label="Reward Account"
+                                placeholder="The accounts that your nodes rewards will be sent to. If not set, they will go to the nodes account."
+                                value={rewardAccount}
+                                disabled={progress}
+                                onChange={(e) => setRewardAccount(e.target.value.trim())}
+                            />
+                        </div>
                     </form>
                 </CardBody>
                 <CardFooter>
@@ -132,6 +144,7 @@ function RegisterCard({ account, registered }: { account: string; registered: ()
 function ManageCard({ account, validator, reloadValidator }: { account: string; validator: Validator; reloadValidator: () => void }) {
     const [isActive, setIsActive] = useState<boolean>(validator.is_active);
     const [postUrl, setPostUrl] = useState<string>(validator.post_url ?? '');
+    const [rewardAccount, setRewardAccount] = useState<string>(validator.reward_account ?? '');
     const [error, setError] = useState('');
     const [progress, setProgress] = useState(false);
     const spinnerColor = useSpinnerColor("teal")
@@ -144,6 +157,7 @@ function ManageCard({ account, validator, reloadValidator }: { account: string; 
                 {
                     is_active: isActive,
                     post_url: postUrl,
+                    reward_account: rewardAccount === '' ? null : rewardAccount,
                 },
                 account,
             );
@@ -203,6 +217,16 @@ function ManageCard({ account, validator, reloadValidator }: { account: string; 
                                     onChange={(e) => setPostUrl(e.target.value.trim())}
                                     className="dark:text-gray-300 dark:focus:border-gray-300 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500" 
                                     labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-300 dark:peer-focus:after:!border-gray-300"}}
+                                />
+                            </div>
+                            <div>
+                                <Input
+                                    size="lg"
+                                    label="Reward Account"
+                                    placeholder="The accounts that your nodes rewards will be sent to. If not set, they will go to the nodes account."
+                                    value={rewardAccount}
+                                    disabled={progress}
+                                    onChange={(e) => setRewardAccount(e.target.value.trim())}
                                 />
                             </div>{' '}
                             {!isActive && (
