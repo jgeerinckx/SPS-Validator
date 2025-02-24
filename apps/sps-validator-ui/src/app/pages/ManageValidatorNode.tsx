@@ -107,8 +107,8 @@ function RegisterCard({ account, registered }: { account: string; registered: ()
                                 value={postUrl}
                                 disabled={progress}
                                 onChange={(e) => setPostUrl(e.target.value.trim())}
-                                className="dark:text-gray-300 dark:focus:border-gray-300 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500" 
-                                labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-300 dark:peer-focus:after:!border-gray-300"}}
+                                className="flex-grow-1 dark:text-gray-300 dark:border-gray-300 dark:border-solid dark:placeholder-shown:border-gray-300 dark:placeholder-shown:border-t-gray-300 dark:focus:border-gray-200 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500 dark:border-t-transparent dark:disabled:text-gray-800" 
+                                labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-200 dark:peer-focus:after:!border-gray-200 dark:before:border-gray-300 dark:after:border-gray-300"}}
                             />
                         </div>
                         <div>
@@ -119,6 +119,8 @@ function RegisterCard({ account, registered }: { account: string; registered: ()
                                 value={rewardAccount}
                                 disabled={progress}
                                 onChange={(e) => setRewardAccount(e.target.value.trim())}
+                                className="flex-grow-1 dark:text-gray-300 dark:border-gray-300 dark:border-solid dark:placeholder-shown:border-gray-300 dark:placeholder-shown:border-t-gray-300 dark:focus:border-gray-200 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500 dark:border-t-transparent dark:disabled:text-gray-800" 
+                                labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-200 dark:peer-focus:after:!border-gray-200 dark:before:border-gray-300 dark:after:border-gray-300"}}
                             />
                         </div>
                     </form>
@@ -215,8 +217,8 @@ function ManageCard({ account, validator, reloadValidator }: { account: string; 
                                     value={postUrl}
                                     disabled={progress}
                                     onChange={(e) => setPostUrl(e.target.value.trim())}
-                                    className="dark:text-gray-300 dark:focus:border-gray-300 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500" 
-                                    labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-300 dark:peer-focus:after:!border-gray-300"}}
+                                    className="flex-grow-1 dark:text-gray-300 dark:border-gray-300 dark:border-solid dark:placeholder-shown:border-gray-300 dark:placeholder-shown:border-t-gray-300 dark:focus:border-gray-200 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500 dark:border-t-transparent dark:disabled:text-gray-800" 
+                                    labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-200 dark:peer-focus:after:!border-gray-200 dark:before:border-gray-300 dark:after:border-gray-300"}}
                                 />
                             </div>
                             <div>
@@ -227,6 +229,8 @@ function ManageCard({ account, validator, reloadValidator }: { account: string; 
                                     value={rewardAccount}
                                     disabled={progress}
                                     onChange={(e) => setRewardAccount(e.target.value.trim())}
+                                    className="flex-grow-1 dark:text-gray-300 dark:border-gray-300 dark:border-solid dark:placeholder-shown:border-gray-300 dark:placeholder-shown:border-t-gray-300 dark:focus:border-gray-200 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500 dark:border-t-transparent dark:disabled:text-gray-800" 
+                                    labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-200 dark:peer-focus:after:!border-gray-200 dark:before:border-gray-300 dark:after:border-gray-300"}}
                                 />
                             </div>{' '}
                             {!isActive && (

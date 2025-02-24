@@ -90,7 +90,14 @@ export function AccountVotes() {
                     <Typography variant="paragraph">Enter an account to look up their votes.</Typography>
 
                     <form className="mt-4 flex gap-4 w-full sm:max-w-[400px]" onSubmit={setAccountInParams}>
-                        <Input value={account} onChange={(e) => setAccount(e.target.value)} label="Account" placeholder="Account" className="flex-grow-1 dark:text-gray-300 dark:focus:border-gray-300 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500" labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-300 dark:peer-focus:after:!border-gray-300"}}/>
+                        <Input 
+                            value={account} 
+                            onChange={(e) => setAccount(e.target.value)} 
+                            label="Account" 
+                            placeholder="Account" 
+                            className="flex-grow-1 dark:text-gray-300 dark:border-gray-300 dark:placeholder-shown:border-t-gray-300 dark:focus:border-gray-200 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500 dark:border-t-transparent" 
+                            labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-200 dark:peer-focus:after:!border-gray-200 dark:before:border-gray-300 dark:after:border-gray-300"}}
+                        />
                         <Button className="p-2 sm:w-32 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" type="submit">
                             <MagnifyingGlassIcon className="sm:hidden h-6 w-6"/>
                             <p className="sr-only sm:not-sr-only">Lookup</p>
