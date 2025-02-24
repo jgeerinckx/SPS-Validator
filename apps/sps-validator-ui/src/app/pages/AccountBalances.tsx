@@ -60,7 +60,14 @@ export function AccountBalances() {
                     <Typography variant="paragraph" className="dark:text-gray-300">Enter an account to look up their account balances.</Typography>
 
                     <form className="mt-4 flex gap-4 2xl:max-w-96 2xl:w-1/4 lg:w-2/3 md:w-full" onSubmit={setAccountInParams}>
-                        <Input value={account} onChange={(e) => setAccount(e.target.value)} label="Account" placeholder="Account" className="flex-grow-1 dark:text-gray-300 dark:focus:border-gray-300 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500" labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-300 dark:peer-focus:after:!border-gray-300"}} />
+                        <Input 
+                            value={account} 
+                            onChange={(e) => setAccount(e.target.value)} 
+                            label="Account" 
+                            placeholder="Account" 
+                            className="flex-grow-1 dark:text-gray-300 dark:border-gray-300 dark:placeholder-shown:border-t-gray-300 dark:focus:border-gray-200 dark:focus:border-t-transparent dark:placeholder:text-gray-300 dark:focus:placeholder:text-gray-500 dark:border-t-transparent" 
+                            labelProps={{className: "dark:peer-placeholder-shown:text-gray-300 dark:placeholder:text-gray-300 dark:text-gray-300 dark:peer-focus:text-gray-300 dark:peer-focus:before:!border-gray-200 dark:peer-focus:after:!border-gray-200 dark:before:border-gray-300 dark:after:border-gray-300"}}
+                        />
                         <Button className="w-32 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" type="submit">
                             Lookup
                         </Button>
