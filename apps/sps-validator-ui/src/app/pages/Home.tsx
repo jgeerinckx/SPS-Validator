@@ -2,11 +2,11 @@ import { Card, CardBody, List, ListItem, Spinner, Typography } from '@material-t
 import { Link } from 'react-router-dom';
 import { usePromise } from '../hooks/Promise';
 import { DefaultService } from '../services/openapi';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { Table, TableHead, TableRow, TableColumn, TableBody, TableCell } from '../components/Table';
 import { useMetrics } from '../context/MetricsContext';
 import useSpinnerColor from '../hooks/SpinnerColor'
-import { GradientOverflow, GradientOverflowProps} from '../components/GradientOverflow'
+import { GradientOverflow} from '../components/GradientOverflow'
 
 const usefulLinks = [
     { name: 'Splinterlands', url: 'https://splinterlands.com' },

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { DefaultService } from '../services/openapi/services/DefaultService';
 import { usePromiseRefresh, usePromise } from '../hooks/Promise';
@@ -13,15 +12,10 @@ interface MetricsContextType {
 }
 
 // Create the context
-//const MetricsContext = createContext<MetricsContextType | undefined>(undefined);
 const MetricsContext = createContext<MetricsContextType | null>(null);
 
 // Context provider component
 export const MetricsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    /*const [spsPriceData] = usePromiseRefresh(() => DefaultService.getPriceForToken('SPS'), 5000, []);
-    const [validatorsData] = usePromise(() => DefaultService.getValidators(0, 0));
-    const [statusData] = usePromiseRefresh(() => DefaultService.getStatus(), 5000, []);
-    */
     const location = useLocation();
     const isDesktop = useMediaQuery({ minWidth: 720 });
     const shouldFetch = isDesktop || location.pathname === "/";
