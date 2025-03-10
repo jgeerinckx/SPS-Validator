@@ -61,14 +61,15 @@ interface InputField {
 interface ValidatorInputGroupProps {
     inputs: InputField[];
     disabled?: boolean;
+    closeOnClick?: boolean;
 }
 
 
-const ValidatorInputGroup: React.FC<ValidatorInputGroupProps> = ({ inputs, disabled }) => {
+const ValidatorInputGroup: React.FC<ValidatorInputGroupProps> = ({ inputs, disabled, closeOnClick }) => {
     const inputContainerRefs = useRef<(HTMLDivElement | null)[]>([]);
     const tooltipRefs = useRef<(HTMLDivElement | null)[]>([]);
     const [activeTooltipIndex, setActiveTooltipIndex] = useState<number | null>(null);
-    const [focusedInputIndex, setFocusedInputIndex] = useState<number | null>(null);
+    const [hoverTooltipIndex, setHoverTooltipIndex] = useState<number | null>(null);
 
     useEffect(() => {
         const updateTooltipWidth = (index: number) => {
@@ -90,49 +91,50 @@ const ValidatorInputGroup: React.FC<ValidatorInputGroupProps> = ({ inputs, disab
             return null;
         });
 
+        const handleDocumentClick = (event: MouseEvent) => {
+            if (activeTooltipIndex !== null && tooltipRefs.current[activeTooltipIndex]) {
+                const tooltipElement = tooltipRefs.current[activeTooltipIndex];
+                if (!tooltipElement?.contains(event.target as Node)) {
+                    setActiveTooltipIndex(null);
+                }
+            }
+        };
+
+        if (activeTooltipIndex !== null) {
+            document.addEventListener('mousedown', handleDocumentClick);
+        }
+
         return () => {
+            document.removeEventListener('mousedown', handleDocumentClick);
             observers.forEach(observer => observer?.disconnect());
         };
-    }, [inputs.length]);
+    }, [inputs.length, activeTooltipIndex]);
 
     const handleMouseEnter = (index: number) => {
-        setActiveTooltipIndex(index);
+        setHoverTooltipIndex(index);
     };
 
     const handleMouseLeave = () => {
-        if (focusedInputIndex === null) {
-            setActiveTooltipIndex(null);
-        }
+        setHoverTooltipIndex(null);
     };
 
-    /*const handleFocus = (index: number) => {
-        setFocusedInputIndex(index);
-        setActiveTooltipIndex(index);
-    };
-
-    const handleBlur = () => {
-        setFocusedInputIndex(null);
-        setActiveTooltipIndex(null);
-    };*/
-
-    const [isTouchDevice, setIsTouchDevice] = useState(false);
-
-    useEffect(() => {
-        setIsTouchDevice(!window.matchMedia("(hover: hover)").matches);
-    }, []);
+    const isTouchDevice = !window.matchMedia("(hover: hover)").matches;
 
     const handleTooltipToggle = (index: number) => {
-        if (isTouchDevice) {
+        if (isTouchDevice || closeOnClick) {
             setActiveTooltipIndex(prev => (prev === index ? null : index));
+        } else {
+            setActiveTooltipIndex(index);
         }
     };
+
     return (
         <div className="flex flex-col gap-4">
             {inputs.map((input, index) => (
                 <div key={index} className="relative flex flex-col">
                     <div 
                         ref={el => tooltipRefs.current[index] = el}
-                        className={`absolute right-0 -top-3 transform -translate-y-full z-10 transition-opacity duration-200 ${activeTooltipIndex === index ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                        className={`absolute right-0 -top-3 transform -translate-y-full z-10 transition-opacity duration-200 ${isTouchDevice ? (activeTooltipIndex === index ? 'opacity-100' : 'opacity-0 pointer-events-none') : (hoverTooltipIndex === index ? 'opacity-100' : 'opacity-0 pointer-events-none')}`}
                     >
                         <div className="relative">
                             <div className="bg-blue-gray-50 text-blue-gray-900 dark:bg-gray-300 dark:text-gray-800 p-2 rounded-xl shadow-lg dark:shadow-none text-sm">
@@ -233,6 +235,7 @@ function RegisterCard({ account, registered }: { account: string; registered: ()
                     <form className="mt-8 flex flex-col gap-6 w-full sm:max-w-[400px]">
                     <ValidatorInputGroup
                         disabled={progress}
+                        closeOnClick={true}
                         inputs={[
                             {
                                 label: "API URL",
@@ -344,6 +347,7 @@ function ManageCard({ account, validator, reloadValidator }: { account: string; 
                             </div>
                             <ValidatorInputGroup
                                 disabled={progress}
+                                closeOnClick={true}
                                 inputs={[
                                     {
                                         label: "API URL",
