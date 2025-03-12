@@ -34,7 +34,7 @@ function UsefulLinksCard() {
 }
 
 function useMetricsCard() {
-    const { spsPrice, validators, lastBlock } = useMetrics(); // Get shared state
+    const { spsPrice, validators, lastBlock } = useMetrics();
 
     return [
         { label: 'SPS Price', value: `$${spsPrice?.toFixed(5) ?? '...'}` },

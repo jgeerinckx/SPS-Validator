@@ -116,7 +116,7 @@ function AppSidebarItems({ closeSidebar }: { closeSidebar: () => void }) {
 }
 
 function useTickers() {
-    const { spsPrice, lastBlock } = useMetrics(); // Get shared state
+    const { spsPrice, lastBlock } = useMetrics();
 
     
         const tickers: AppNavbarTickerProps[] = [];
@@ -141,7 +141,6 @@ export function App() {
     const isDesktop = useMediaQuery({ minWidth: 961 });
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
     
-    // Close sidebar when switching to desktop view
     useEffect(() => {
         if (isDesktop) {
         setMobileSidebarOpen(false);

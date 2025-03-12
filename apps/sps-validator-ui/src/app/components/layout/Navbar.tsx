@@ -24,9 +24,6 @@ export type AppNavbarProps = {
 };
 
 export function AppNavbar(props: AppNavbarProps) {
-    /*const toggleDrawer = () => {
-        props.toggleSidebar?.();
-    };*/
     return (
         <Navbar fullWidth={true} className="px-4 py-2 lg:px-8 lg:py-4 flex-grow-0 z-50 dark:bg-gray-800 dark:text-gray-300 dark:border-0 dark:shadow-none">
             <div className="flex items-center justify-between text-blue-gray-900 dark:text-gray-300">

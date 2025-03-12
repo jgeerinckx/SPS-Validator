@@ -43,26 +43,6 @@ function VoteCard({
         setPage(0);
     };
 
-    // Replace the existing voteFor function with this:
-    const handleVoteAction = async (validator: string, hasVoted: boolean) => {
-        setError('');
-        setProgress(true);
-        try {
-            const broadcastResult = await (hasVoted 
-                ? HiveService.disapproveValidator({ account_name: validator })
-                : HiveService.approveValidator({ account_name: validator })
-            );
-            if (broadcastResult.error || !broadcastResult.result) {
-                throw new Error(broadcastResult.error ?? 'Error broadcasting transaction');
-            }
-            await reloadVotes();
-        } catch (err: any) {
-            setError(err.message);
-        } finally {
-            setProgress(false);
-        }
-    };
-
     const voteFor = async (validator: string) => {
         setError('');
         setProgress(true);
@@ -268,11 +248,11 @@ function MyVotesCard({
                                         <TableCell>{localeNumber(vote.vote_weight)}</TableCell>
                                         <TableCell>
                                             <div className="flex justify-center">
-                                                <Button disabled={progress} onClick={() => onNodeSelected(vote.validator)} size="sm" className="me-2 p-2 sm:py-3 sm:px-6 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none">
+                                                <Button disabled={progress} onClick={() => onNodeSelected(vote.validator)} size="sm" className="me-2 p-2 sm:px-4 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none">
                                                     <EyeIcon className="sm:hidden size-6" />
                                                     <p className="sr-only sm:not-sr-only">View</p>
                                                 </Button>
-                                                <Button className="p-2 sm:py-3 sm:px-6 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" disabled={progress} onClick={() => removeVote(vote.validator)}>
+                                                <Button className="p-2 sm:px-4 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" disabled={progress} onClick={() => removeVote(vote.validator)}>
                                                     <div className="flex flex-row items-center">
                                                         {progress && <Spinner className="me-3" width={16} height={16} color={spinnerColor} />}
                                                         <TrashIcon className="sm:hidden size-6"/>
