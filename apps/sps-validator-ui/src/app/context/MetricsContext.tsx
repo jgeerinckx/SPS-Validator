@@ -15,7 +15,7 @@ const MetricsContext = createContext<MetricsContextType | null>(null);
 export const MetricsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const location = useLocation();
     const isDesktop = useMediaQuery({ minWidth: 720 });
-    const shouldFetch = isDesktop || location.pathname === "/" || location.pathname.startsWith("/block-explorer");
+    const shouldFetch = isDesktop || location.pathname === "/";
     
     const fetchSPSPrice = shouldFetch ? () => DefaultService.getPriceForToken("SPS") : () => Promise.resolve(undefined);
     const fetchValidators = shouldFetch ? () => DefaultService.getValidators(0, 0) : () => Promise.resolve(undefined);

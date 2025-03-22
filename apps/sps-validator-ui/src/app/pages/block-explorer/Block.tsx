@@ -1,7 +1,7 @@
 import { Button, Card, CardBody, Chip, List, ListItem, Spinner, Typography } from '@material-tailwind/react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { localeNumber } from '../../components/LocaleNumber';
-import { Table, TableBody, TableCell, TableRow, TableCellProps } from '../../components/Table';
+import { Table, TableBody, TableCell, TableRow } from '../../components/Table';
 import { usePromise } from '../../hooks/Promise';
 import { DefaultService } from '../../services/openapi';
 import React from 'react';

@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
-import { TableBody, TableRow, TableCell, Table, GradientOverflow } from '../../components/Table';
+import { TableBody, TableRow, TableCell, Table } from '../../components/Table';
 import { usePromise } from '../../hooks/Promise';
 import { DefaultService } from '../../services/openapi';
 import { OmniBox } from './OmniBox';
