@@ -30,7 +30,7 @@ export function BlockList({ className }: { className?: string }) {
                     {blocks.map((block, i) => (
                         <React.Fragment key={block.block_num}>
                             <ListItem onClick={listItemClickHandler(() => nav(`/block-explorer/block?block=${block.block_num}`))} className="cursor-pointer outer-list-item px-0 py-2 sm:p-3">
-                                <div className="flex flex-row flex-wrap gap-2 w-full">
+                                <div className="flex flex-row flex-wrap gap-2 w-full" onClick={() => {window.location.href = `/block-explorer/block?block=${block.block_num}`;;}} style={{ cursor: 'pointer' }}>
                                     <Typography variant="paragraph" color="blue-gray" className="font-semibold">
                                         Block{' '}
                                         <Link to={`/block-explorer/block?block=${block.block_num}`} className="font-semibold underline text-blue-gray-800">
