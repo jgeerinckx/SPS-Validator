@@ -69,7 +69,7 @@ function AccountInfo({ account, className }: { account: string | null; className
                                         {isValidatorLoading && <Spinner />}
                                         {!isValidatorLoading && !validator && 'Not a validator'}
                                         {!isValidatorLoading && validator && (
-                                            <Link to={`/validator-nodes?node=${account}`} target="_blank" className="text-blue-gray-800 underline">
+                                            <Link to={`/validator-nodes?node=${account}`} className="text-blue-gray-800 underline">
                                                 {account}
                                             </Link>
                                         )}
@@ -166,11 +166,11 @@ function TransactionList({ account, className }: { account: string | null; class
                         Transactions
                     </Typography>
                     <div className="ml-auto flex gap-2 sm:gap-3 items-center">
-                        <Button variant="outlined" className="px-1 py-1 sm:px-6 sm:py-3" onClick={() => page('prev')}>
-                            Previous Page
+                        <Button variant="outlined" className="px-2 py-2 sm:px-6 sm:py-3 flex flex-col sm:flex-row sm:gap-1" onClick={() => page('prev')}>
+                            <span className="min-w-[65px] sm:min-w-0">Previous</span><span>Page</span> 
                         </Button>
-                        <Button variant="outlined" className="px-1 py-1 sm:px-6 sm:py-3" onClick={() => page('next')}>
-                            Next Page
+                        <Button variant="outlined" className="px-2 py-2 sm:px-6 sm:py-3 flex flex-col sm:flex-row sm:gap-1" onClick={() => page('next')}>
+                            <span className="min-w-[65px] sm:min-w-0">Next</span><span>Page</span>
                         </Button>
                     </div>
                 </div>

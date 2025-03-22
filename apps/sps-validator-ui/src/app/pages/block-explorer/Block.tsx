@@ -28,11 +28,11 @@ function BlockInfo({ block: blockNum, className }: { block: string | null; class
                         Block {localeNumber(parsedBlockNum, 0)}
                     </Typography>
                     <div className="ml-auto flex gap-3 items-center">
-                        <Button variant="outlined" className="p-2 sm:px-6 sm:py-3" onClick={() => navigate(`/block-explorer/block?block=${parsedBlockNum - 1}`)}>
-                            Previous Block
+                        <Button variant="outlined" className="p-2 sm:px-6 sm:py-3 flex flex-col sm:flex-row sm:gap-1" onClick={() => navigate(`/block-explorer/block?block=${parsedBlockNum - 1}`)}>
+                            <span className="min-w-[65px] sm:min-w-0">Previous</span><span>Block</span>
                         </Button>
-                        <Button variant="outlined" className="p-2 sm:px-6 sm:py-3" onClick={() => navigate(`/block-explorer/block?block=${parsedBlockNum + 1}`)}>
-                            Next Block
+                        <Button variant="outlined" className="p-2 sm:px-6 sm:py-3 flex flex-col sm:flex-row sm:gap-1" onClick={() => navigate(`/block-explorer/block?block=${parsedBlockNum + 1}`)}>
+                            <span className="min-w-[65px] sm:min-w-0">Next</span><span>Block</span>
                         </Button>
                     </div>
                 </div>
