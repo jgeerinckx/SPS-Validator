@@ -2,11 +2,12 @@ import { BoltIcon, CalendarIcon, ShieldCheckIcon, UserCircleIcon } from '@heroic
 import { formatBlockTime } from './utils';
 import { Chip, Tooltip } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-export function BlockTimeChip({ blockTime }: { blockTime?: string }) {
+export function BlockTimeChip({ blockTime, className }: { blockTime?: string; className?: string }) {
     return (
-        <Tooltip content={`The block time in your local timezone (UTC: ${blockTime})`} placement="top">
-            <Chip variant="ghost" value={formatBlockTime(blockTime)} icon={<CalendarIcon />} />
+        <Tooltip content={`The block time in your local timezone (UTC: ${blockTime})`} placement="top" className="dark:bg-gray-700 dark:text-gray-200">
+            <Chip variant="ghost" value={formatBlockTime(blockTime)} icon={<CalendarIcon />} className={className} />
         </Tooltip>
     );
 }
@@ -21,15 +22,19 @@ export function AccountChip({ account, className }: { account: string; className
     );
 }
 
-export function ValidatorChip({ account, validation_tx, className }: { account?: string; validation_tx?: string; className?: string }) {
+export function ValidatorChip({ account, validation_tx, className}: { account?: string; validation_tx?: string; className?: string }) {
+    const [isHovered, setIsHovered] = useState(false);
+    //{`dark:text-gray-800 transition-colors ${isHovered ? 'dark:bg-gray-700 dark:text-gray-200' : 'dark:bg-gray-300'}`}
     return (
-        <Link className={className} to={`/block-explorer/account?account=${account}`}>
-            <Tooltip content="The validator selected for this block">
+        <Link className="dark:text-gray-300" to={`/block-explorer/account?account=${account}`}>
+            <Tooltip content="The validator selected for this block" className="dark:bg-gray-700 dark:text-gray-200" >
                 <Chip
                     variant="outlined"
                     color={validation_tx ? 'green' : 'gray'}
                     value={account ?? 'not assigned'}
                     icon={validation_tx ? <ShieldCheckIcon /> : <UserCircleIcon />}
+                    className={` ${validation_tx ? ' dark:!text-green-600 dark:!border-green-600' : ''} ${className}
+                      `}
                 />
             </Tooltip>
         </Link>

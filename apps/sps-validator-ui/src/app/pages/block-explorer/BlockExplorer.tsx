@@ -23,28 +23,28 @@ export function BlockList({ className }: { className?: string }) {
     return (
         <Card className={className}>
             <CardBody>
-                <Typography variant="h5" color="blue-gray" className="mb-2">
+                <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                     Recent Blocks
                 </Typography>
                 <List className="p-0 mt-4">
                     {blocks.map((block, i) => (
-                        <React.Fragment key={block.block_num}>
-                            <ListItem onClick={listItemClickHandler(() => nav(`/block-explorer/block?block=${block.block_num}`))} className="cursor-pointer outer-list-item px-0 py-2 sm:p-3">
-                                <div className="flex flex-row flex-wrap gap-2 w-full" onClick={() => {window.location.href = `/block-explorer/block?block=${block.block_num}`;;}} style={{ cursor: 'pointer' }}>
-                                    <Typography variant="paragraph" color="blue-gray" className="font-semibold">
+                        <React.Fragment key={block.block_num} >
+                            <ListItem className="cursor-pointer outer-list-item px-0 py-2 sm:p-3 group dark:hover:bg-gray-300" >
+                                <div className="flex flex-row flex-wrap gap-2 w-full dark:group-hover:text-gray-800" onClick={() => {window.location.href = `/block-explorer/block?block=${block.block_num}`;;}} style={{ cursor: 'pointer' }} >
+                                    <Typography variant="paragraph" color="blue-gray" className="font-semibold dark:text-gray-300 dark:group-hover:text-gray-800">
                                         Block{' '}
-                                        <Link to={`/block-explorer/block?block=${block.block_num}`} className="font-semibold underline text-blue-gray-800">
+                                        <Link to={`/block-explorer/block?block=${block.block_num}`} className="font-semibold underline text-blue-gray-800 dark:text-gray-400 dark:group-hover:text-gray-900">
                                             {block.block_num}
                                         </Link>
                                     </Typography>
                                     <div className="sm:basis-full sm:h-0"></div>
-                                    <BlockTimeChip blockTime={block.block_time} />
+                                    <BlockTimeChip blockTime={block.block_time} className="dark:text-gray-800 dark:bg-gray-300 dark:group-hover:bg-gray-800 dark:group-hover:text-gray-300" />
                                     <div className="basis-full h-0 sm:hidden"></div>
-                                    <ValidatorChip className="w-min" account={block.validator} validation_tx={block.validation_tx} />
+                                    <ValidatorChip className="w-min dark:text-gray-300 dark:border-gray-300 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800" account={block.validator} validation_tx={block.validation_tx} />
                                 </div>
                                 
                             </ListItem>
-                            {i !== blocks.length - 1 && <hr className="my-0 opacity-75 border-blue-gray-200" />}
+                            {i !== blocks.length - 1 && <hr className="my-0 opacity-75 border-blue-gray-200 dark:border-gray-300" />}
                         </React.Fragment>
                     ))}
                 </List>
@@ -56,8 +56,8 @@ export function BlockList({ className }: { className?: string }) {
 export function BlockExplorer() {
     return (
         <div className="grid grid-cols-1 place-items-center gap-4">
-            <OmniBox className="2xl:w-3/4 w-full" />
-            <BlockList className="2xl:w-3/4 w-full" />
+            <OmniBox className="2xl:w-3/4 w-full dark:bg-gray-800 dark:text-gray-300" />
+            <BlockList className="2xl:w-3/4 w-full dark:bg-gray-800 dark:text-gray-300" />
         </div>
     );
 }
