@@ -5,16 +5,17 @@ import { usePromise } from '../../hooks/Promise';
 import { Link, useNavigate } from 'react-router-dom';
 import { OmniBox } from './OmniBox';
 import { BlockTimeChip, ValidatorChip } from './Chips';
-import { listItemClickHandler } from './utils';
+import { useSpinnerColor } from '../../hooks/SpinnerColor';
 
 export function BlockList({ className }: { className?: string }) {
     const [blockOffset] = useState(undefined);
     const [limit] = useState(15);
     const [blocks, isBlocksLoading] = usePromise(() => DefaultService.getBlocks(limit, blockOffset), [limit, blockOffset]);
     const nav = useNavigate();
-
+    const spinnerColor = useSpinnerColor("blue");
+    
     if (isBlocksLoading) {
-        return <Spinner />;
+        return <Spinner color={spinnerColor} />;
     }
     if (!blocks || blocks.length === 0) {
         return <div>No blocks found</div>;
@@ -40,7 +41,7 @@ export function BlockList({ className }: { className?: string }) {
                                     <div className="sm:basis-full sm:h-0"></div>
                                     <BlockTimeChip blockTime={block.block_time} className="dark:text-gray-800 dark:bg-gray-300 dark:group-hover:bg-gray-800 dark:group-hover:text-gray-300" />
                                     <div className="basis-full h-0 sm:hidden"></div>
-                                    <ValidatorChip className="w-min dark:text-gray-300 dark:border-gray-300 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800" account={block.validator} validation_tx={block.validation_tx} />
+                                    <ValidatorChip className="w-min dark:text-gray-500 dark:border-gray-500 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800" account={block.validator} validation_tx={block.validation_tx} />
                                 </div>
                                 
                             </ListItem>

@@ -30,7 +30,7 @@ export function ValidatorChip({ account, validation_tx, className}: { account?: 
                     color={validation_tx ? 'green' : 'gray'}
                     value={account ?? 'not assigned'}
                     icon={validation_tx ? <ShieldCheckIcon /> : <UserCircleIcon />}
-                    className={` ${validation_tx ? ' dark:!text-green-600 dark:!border-green-600' : ''} ${className}
+                    className={` ${validation_tx ? ' dark:!text-green-500 dark:!border-green-500' : ''} ${className}
                       `}
                 />
             </Tooltip>
