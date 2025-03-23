@@ -56,7 +56,7 @@ export function BlockList({ className }: { className?: string }) {
 export function BlockExplorer() {
     return (
         <div className="grid grid-cols-1 place-items-center gap-4">
-            <OmniBox className="2xl:w-3/4 w-full dark:bg-gray-800 dark:text-gray-300" />
+            <OmniBox className="2xl:w-3/4 w-full" />
             <BlockList className="2xl:w-3/4 w-full dark:bg-gray-800 dark:text-gray-300" />
         </div>
     );

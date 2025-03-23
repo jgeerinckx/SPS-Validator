@@ -60,7 +60,7 @@ export function OmniBox({ className }: { className?: string }) {
         }
     };
     return (
-        <Card className={className}>
+        <Card className={`${className} dark:bg-gray-800 dark:text-gray-300`}>
             <CardBody>
                 <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
                     Search
