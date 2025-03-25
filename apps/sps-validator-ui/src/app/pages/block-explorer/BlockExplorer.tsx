@@ -31,18 +31,18 @@ export function BlockList({ className }: { className?: string }) {
                 <List className="p-0 mt-4">
                     {blocks.map((block, i) => (
                         <React.Fragment key={block.block_num} >
-                            <ListItem onClick={listItemClickHandler(() => nav(`/block-explorer/block?block=${block.block_num}`))} className="cursor-pointer outer-list-item px-1 py-2 sm:p-3 group dark:hover:bg-gray-300" >
-                                <div className="flex flex-row flex-wrap gap-2 w-full pointer-events-none dark:group-hover:text-gray-800" >
-                                    <Typography variant="paragraph" color="blue-gray" className="font-semibold dark:text-gray-300 dark:group-hover:text-gray-800">
+                            <ListItem onClick={listItemClickHandler(() => nav(`/block-explorer/block?block=${block.block_num}`))} className="cursor-pointer outer-list-item px-1 py-2 sm:p-3 group dark:hover:bg-gray-300 dark:focus:bg-gray-300" >
+                                <div className="flex flex-row flex-wrap gap-2 w-full pointer-events-none dark:group-hover:text-gray-800 dark:group-focus:text-gray-800" >
+                                    <Typography variant="paragraph" color="blue-gray" className="font-semibold dark:text-gray-300 dark:group-hover:text-gray-800 dark:group-focus:text-gray-800">
                                         Block{' '}
-                                        <Link to={`/block-explorer/block?block=${block.block_num}`} className="font-semibold underline text-blue-gray-800 dark:text-gray-400 dark:group-hover:text-gray-900">
+                                        <Link to={`/block-explorer/block?block=${block.block_num}`} className="font-semibold underline text-blue-gray-800 dark:text-gray-400 dark:group-hover:text-gray-900 dark:group-focus:text-gray-900">
                                             {block.block_num}
                                         </Link>
                                     </Typography>
                                     <div className="sm:basis-full sm:h-0"></div>
-                                    <BlockTimeChip blockTime={block.block_time} className="pointer-events-auto dark:text-gray-800 dark:bg-gray-300 dark:group-hover:bg-gray-800 dark:group-hover:text-gray-300" />
+                                    <BlockTimeChip blockTime={block.block_time} className="pointer-events-auto dark:text-gray-800 dark:bg-gray-300 dark:group-hover:bg-gray-800 dark:group-hover:text-gray-300 dark:group-focus:bg-gray-800 dark:group-focus:text-gray-300" />
                                     <div className="basis-full h-0 sm:hidden"></div>
-                                    <ValidatorChip className="w-min pointer-events-auto dark:text-gray-500 dark:border-gray-500 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800" account={block.validator} validation_tx={block.validation_tx} />
+                                    <ValidatorChip className="w-min pointer-events-auto dark:text-gray-500 dark:border-gray-500 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800 dark:group-focus:text-gray-800 dark:group-focus:border-gray-800" account={block.validator} validation_tx={block.validation_tx} />
                                 </div>
                                 
                             </ListItem>

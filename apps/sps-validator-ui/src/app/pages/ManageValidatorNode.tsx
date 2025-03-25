@@ -137,11 +137,11 @@ const ValidatorInputGroup: React.FC<ValidatorInputGroupProps> = ({ inputs, disab
                         className={`absolute right-0 -top-3 transform -translate-y-full z-10 transition-opacity duration-200 ${isTouchDevice ? (activeTooltipIndex === index ? 'opacity-100' : 'opacity-0 pointer-events-none') : (hoverTooltipIndex === index ? 'opacity-100' : 'opacity-0 pointer-events-none')}`}
                     >
                         <div className="relative">
-                            <div className="bg-blue-gray-50 text-blue-gray-900 dark:bg-gray-700 dark:text-gray-200 p-2 rounded-xl shadow-lg dark:shadow-none text-sm">
+                            <div className="bg-blue-gray-50 text-blue-gray-900 dark:bg-gray-600 dark:text-gray-100 p-2 rounded-xl shadow-lg dark:shadow-none text-sm">
                                 {input.tooltip}
                             </div>
                             <div 
-                                className="absolute -bottom-[16px] right-[26px] w-0 h-0 border-l-[16px] border-l-transparent border-r-[0px] border-r-transparent border-t-[16px] border-t-blue-gray-50 dark:border-t-gray-700"
+                                className="absolute -bottom-[16px] right-[26px] w-0 h-0 border-l-[16px] border-l-transparent border-r-[0px] border-r-transparent border-t-[16px] border-t-blue-gray-50 dark:border-t-gray-600"
                             />
                         </div>
                     </div>
