@@ -1,12 +1,12 @@
-import { Button, Card, CardBody, Chip, List, ListItem, Spinner, Typography } from '@material-tailwind/react';
+import { Button, Card, CardBody, Chip, List, ListItem, Spinner, Tooltip, Typography } from '@material-tailwind/react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { localeNumber } from '../../components/LocaleNumber';
-import { GradientOverflow, Table, TableBody, TableCell, TableColumn, TableHead, TableHeader, TableRow } from '../../components/Table';
+import { GradientOverflow, Table, TableBody, TableCell, TableHeader, TableRow } from '../../components/Table';
 import { usePromise } from '../../hooks/Promise';
 import { DefaultService, Transaction } from '../../services/openapi';
 import React, { useRef, useState } from 'react';
 import { OmniBox } from './OmniBox';
-import { AccountChip, TxStatusChip, TxTypeChip } from './Chips';
+import { AccountChip, BlockTimeChip, TxStatusChip, TxTypeChip } from './Chips';
 import { listItemClickHandler } from './utils';
 import { useSpinnerColor } from '../../hooks/SpinnerColor';
 
@@ -34,10 +34,13 @@ function AccountInfo({ account, className }: { account: string | null; className
     return (
         <Card className={className}>
             <CardBody>
-                <div className="flex mb-3">
-                    <Typography variant="h5" color="blue-gray" className="dark:text-gray-200">
+                <div className="flex align-middle justify-between sm:justify-start mb-3">
+                    <Typography variant="h5" color="blue-gray" className="dark:text-gray-200 self-center">
                         Account {account}
                     </Typography>
+                    {account != null && (
+                        <img src={`https://images.hive.blog/u/${account}/avatar`} className="inline-block rounded-full border dark:border-gray-300 sm:ml-3 h-10 w-10" alt={account ?? 'User Avatar'} />
+                    )}
                 </div>
 
                 {isAccountLoading && (
@@ -159,16 +162,16 @@ function TransactionList({ account, className }: { account: string | null; class
     return (
         <Card className={className}>
             <CardBody>
-                <div className="flex mb-3">
-                    <Typography variant="h5" color="blue-gray" className="dark:text-gray-200">
-                        Transactions
+                <div className="flex flex-col  sm:flex-row w-full mb-3">
+                    <Typography variant="h5" color="blue-gray" className="dark:text-gray-200 text-wrap mb-3 sm:mb-0">
+                        Transactions for {account}
                     </Typography>
                     <div className="ml-auto flex gap-2 sm:gap-3 items-center">
-                        <Button variant="outlined" className="px-2 py-2 sm:px-6 sm:py-3 flex flex-col sm:flex-row sm:gap-1 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" onClick={() => page('prev')}>
-                            <span className="min-w-[65px] sm:min-w-0">Previous</span><span>Page</span> 
+                        <Button variant="outlined" className="px-2 py-2 sm:px-6 sm:py-3 sm:gap-1 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" onClick={() => page('prev')}>
+                            Previous Page
                         </Button>
-                        <Button variant="outlined" className="px-2 py-2 sm:px-6 sm:py-3 flex flex-col sm:flex-row sm:gap-1 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" onClick={() => page('next')}>
-                            <span className="min-w-[65px] sm:min-w-0">Next</span><span>Page</span>
+                        <Button variant="outlined" className="px-2 py-2 sm:px-6 sm:py-3 sm:gap-1 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" onClick={() => page('next')}>
+                            Next Page
                         </Button>
                     </div>
                 </div>
@@ -188,25 +191,30 @@ function TransactionList({ account, className }: { account: string | null; class
                     <List className="p-0 ">
                         {transactions.map((tx, i) => (
                             <React.Fragment key={tx.id}>
-                                <ListItem onClick={listItemClickHandler(() => navigate(`/block-explorer/transaction?id=${tx.id}`))} className="cursor-pointer outer-list-item  group dark:hover:bg-gray-300">
-                                    <div>
+                                <ListItem onClick={listItemClickHandler(() => navigate(`/block-explorer/transaction?id=${tx.id}`))} className="cursor-pointer outer-list-item group dark:hover:bg-gray-300">
+                                    <div className="pointer-events-none">
                                         <div className="mb-2">
                                             <Typography variant="paragraph" color="blue-gray" className="flex md:items-center gap-2 flex-col md:flex-row mb-2 md:mb-0 dark:text-gray-300 dark:group-hover:text-gray-800">
                                                 <Link to={`/block-explorer/transaction?id=${tx.id}`} className="font-semibold underline text-blue-gray-800 dark:text-gray-400 dark:group-hover:text-gray-900 break-all">
                                                     {tx.id}
                                                 </Link>{' '}
                                                 <span className="hidden md:block">|{' '}</span>
-                                                <Link to={`/block-explorer/block?block=${tx.block_num}`} className="font-semibold underline text-blue-gray-800 dark:text-gray-400 dark:group-hover:text-gray-900">
+                                                <Link to={`/block-explorer/block?block=${tx.block_num}`} className="pointer-events-auto font-semibold underline text-blue-gray-800 dark:text-gray-400 dark:group-hover:text-gray-900">
                                                     Block {tx.block_num}
                                                 </Link>
                                                 {tx.id.includes('_') && <Chip variant="outlined" value="virtual" className="ml-2 rounded-full inline italic dark:text-gray-300 dark:border-gray-300 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800" />}
                                             </Typography>
                                         </div>
                                         <div className="flex flex-wrap items-center gap-2 w-full">
-                                            <TxTypeChip type={tx.type} className="order-1 dark:text-gray-800 dark:bg-gray-300 dark:group-hover:bg-gray-800 dark:group-hover:text-gray-300" />
-                                            <AccountChip account={tx.player} className="order-4 sm:order-2 dark:text-gray-300 dark:border-gray-300 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800" />
-                                            <TxStatusChip success={tx.success ?? false} error={tx.error} className="order-2 sm:order-3" />
-                                            <div className="basis-full h-0 sm:hidden order-3"></div>
+                                            <TxTypeChip type={tx.type} className="pointer-events-auto dark:text-gray-800 dark:bg-gray-300 dark:group-hover:bg-gray-800 dark:group-hover:text-gray-300" />
+                                            <TxStatusChip success={tx.success ?? false} error={tx.error} className="pointer-events-auto" />
+                                            <BlockTimeChip blockTime={tx.created_date} className=" pointer-events-auto dark:text-gray-800 dark:bg-gray-300 dark:group-hover:bg-gray-800 dark:group-hover:text-gray-300" />
+                                            <AccountChip account={tx.player} className="hidden md:block pointer-events-auto dark:text-gray-300 dark:border-gray-300 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800" />
+                                            {account != null && (
+                                                <Tooltip content={account ?? 'Account Avatar'}  className="dark:bg-gray-700 dark:text-gray-200">
+                                                    <img src={`https://images.hive.blog/u/${account}/avatar`} className="pointer-events-auto inline-block rounded-full border dark:border-gray-300 h-7 w-7 md:hidden" alt={account ?? 'Account Avatar'} />
+                                                </Tooltip>
+                                            )}
                                         </div>
                                     </div>
                                 </ListItem>

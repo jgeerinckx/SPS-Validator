@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { OmniBox } from './OmniBox';
 import { BlockTimeChip, ValidatorChip } from './Chips';
 import { useSpinnerColor } from '../../hooks/SpinnerColor';
+import { listItemClickHandler } from './utils';
 
 export function BlockList({ className }: { className?: string }) {
     const [blockOffset] = useState(undefined);
@@ -20,7 +21,7 @@ export function BlockList({ className }: { className?: string }) {
     if (!blocks || blocks.length === 0) {
         return <div>No blocks found</div>;
     }
-
+    
     return (
         <Card className={className}>
             <CardBody>
@@ -30,8 +31,8 @@ export function BlockList({ className }: { className?: string }) {
                 <List className="p-0 mt-4">
                     {blocks.map((block, i) => (
                         <React.Fragment key={block.block_num} >
-                            <ListItem className="cursor-pointer outer-list-item px-0 py-2 sm:p-3 group dark:hover:bg-gray-300" >
-                                <div className="flex flex-row flex-wrap gap-2 w-full dark:group-hover:text-gray-800" onClick={() => {window.location.href = `/block-explorer/block?block=${block.block_num}`;;}} style={{ cursor: 'pointer' }} >
+                            <ListItem onClick={listItemClickHandler(() => nav(`/block-explorer/block?block=${block.block_num}`))} className="cursor-pointer outer-list-item px-1 py-2 sm:p-3 group dark:hover:bg-gray-300" >
+                                <div className="flex flex-row flex-wrap gap-2 w-full pointer-events-none dark:group-hover:text-gray-800" >
                                     <Typography variant="paragraph" color="blue-gray" className="font-semibold dark:text-gray-300 dark:group-hover:text-gray-800">
                                         Block{' '}
                                         <Link to={`/block-explorer/block?block=${block.block_num}`} className="font-semibold underline text-blue-gray-800 dark:text-gray-400 dark:group-hover:text-gray-900">
@@ -39,9 +40,9 @@ export function BlockList({ className }: { className?: string }) {
                                         </Link>
                                     </Typography>
                                     <div className="sm:basis-full sm:h-0"></div>
-                                    <BlockTimeChip blockTime={block.block_time} className="dark:text-gray-800 dark:bg-gray-300 dark:group-hover:bg-gray-800 dark:group-hover:text-gray-300" />
+                                    <BlockTimeChip blockTime={block.block_time} className="pointer-events-auto dark:text-gray-800 dark:bg-gray-300 dark:group-hover:bg-gray-800 dark:group-hover:text-gray-300" />
                                     <div className="basis-full h-0 sm:hidden"></div>
-                                    <ValidatorChip className="w-min dark:text-gray-500 dark:border-gray-500 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800" account={block.validator} validation_tx={block.validation_tx} />
+                                    <ValidatorChip className="w-min pointer-events-auto dark:text-gray-500 dark:border-gray-500 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800" account={block.validator} validation_tx={block.validation_tx} />
                                 </div>
                                 
                             </ListItem>

@@ -137,19 +137,19 @@ function TransactionList({ block: blockNum, className }: { block: string | null;
                         {transactions.map((tx, i) => (
                             <React.Fragment key={tx.id}>
                                 <ListItem onClick={listItemClickHandler(() => nav(`/block-explorer/transaction?id=${tx.id}`))} className="cursor-pointer outer-list-item  group dark:hover:bg-gray-300">
-                                    <div>
+                                    <div className="pointer-events-none">
                                         <div className="mb-2">
                                             <Typography variant="paragraph" color="blue-gray" className="flex items-center break-all">
-                                                <Link to={`/block-explorer/transaction?id=${tx.id}`} className="font-semibold underline text-blue-gray-800 dark:text-gray-300 dark:group-hover:text-gray-800">
+                                                <Link to={`/block-explorer/transaction?id=${tx.id}`} className="pointer-events-auto font-semibold underline text-blue-gray-800 dark:text-gray-300 dark:group-hover:text-gray-800">
                                                     {tx.id}
                                                 </Link>
                                                 {tx.id.includes('_') && <Chip variant="outlined" value="virtual" className="ml-2 rounded-full inline italic dark:text-gray-300 dark:border-gray-300 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800" />}
                                             </Typography>
                                         </div>
                                         <div className="flex flex-wrap items-center gap-2 w-full">
-                                            <TxTypeChip type={tx.type} className="order-1 dark:text-gray-800 dark:bg-gray-300 dark:group-hover:bg-gray-800 dark:group-hover:text-gray-300" />
-                                            <AccountChip account={tx.player} className="order-4 sm:order-2 dark:text-gray-300 dark:border-gray-300 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800" />
-                                            <TxStatusChip success={tx.success ?? false} error={tx.error} className="order-2 sm:order-3" />
+                                            <TxTypeChip type={tx.type} className="order-1 pointer-events-auto dark:text-gray-800 dark:bg-gray-300 dark:group-hover:bg-gray-800 dark:group-hover:text-gray-300" />
+                                            <AccountChip account={tx.player} className="order-4 sm:order-2 pointer-events-auto dark:text-gray-300 dark:border-gray-300 dark:group-hover:text-gray-800 dark:group-hover:border-gray-800" />
+                                            <TxStatusChip success={tx.success ?? false} error={tx.error} className="order-2 sm:order-3 pointer-events-auto dark:text-gray-200" />
                                             <div className="basis-full h-0 sm:hidden order-3"></div>
                                         </div>
                                     </div>
