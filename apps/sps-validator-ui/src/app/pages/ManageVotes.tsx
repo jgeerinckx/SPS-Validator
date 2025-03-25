@@ -71,6 +71,28 @@ function VoteCard({
 
     const noValidators = result?.validators === undefined || result.validators.length === 0;
 
+    const removeVote = async (validator: string) => {
+        setError('');
+        setProgress(true);
+        try {
+            const broadcastResult = await HiveService.disapproveValidator({
+                account_name: validator,
+            });
+            if (broadcastResult.error || !broadcastResult.result) {
+                throw new Error(broadcastResult.error ?? 'There was an error broadcasting the transaction');
+            }
+            const txResult = await TxLookupService.waitForTx(broadcastResult.result!.id);
+            if (!txResult.success) {
+                throw new Error(txResult.error ?? 'There was an error broadcasting the transaction');
+            }
+            reloadVotes();
+        } catch (err) {
+            setError(err!.toString());
+        } finally {
+            setProgress(false);
+        }
+    };
+
     return (
         <Card className="3xl:col-span-3 dark:bg-gray-800 dark:text-gray-300 dark:shadow-none">
             <CardBody>
@@ -160,14 +182,26 @@ function VoteCard({
                                                 >
                                                     View
                                                 </Button>
-                                                <Button
-                                                    disabled={votes.some((v) => v.validator === validator.account_name) || progress}
-                                                    onClick={() => voteFor(validator.account_name)}
-                                                    size="sm"
-                                                    className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none"
-                                                >
-                                                    Vote {votes.some((v) => v.validator === validator.account_name) && '(already voted)'}
-                                                </Button>
+                                                {
+                                                    votes.some((v) => v.validator === validator.account_name) ?
+                                                        <Button
+                                                            disabled={progress}
+                                                            onClick={() => removeVote(validator.account_name)}
+                                                            size="sm"
+                                                            className="dark:bg-red-800 dark:hover:bg-red-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none text-nowrap"
+                                                        >
+                                                            Remove Vote
+                                                        </Button>
+                                                        :
+                                                        <Button
+                                                            disabled={progress}
+                                                            onClick={() =>voteFor(validator.account_name)}
+                                                            size="sm"
+                                                            className="dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none"
+                                                        >
+                                                            Vote
+                                                        </Button>
+                                                }
                                             </div>
                                         </TableCell>
                                     </TableRow>
@@ -252,7 +286,7 @@ function MyVotesCard({
                                                     <EyeIcon className="sm:hidden size-6" />
                                                     <p className="sr-only sm:not-sr-only">View</p>
                                                 </Button>
-                                                <Button className="p-2 sm:px-4 dark:bg-blue-800 dark:hover:bg-blue-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" disabled={progress} onClick={() => removeVote(vote.validator)}>
+                                                <Button className="p-2 sm:px-4 dark:bg-red-800 dark:hover:bg-red-600 dark:border-gray-300 dark:border dark:text-gray-300 dark:hover:text-gray-100 dark:shadow-none" disabled={progress} onClick={() => removeVote(vote.validator)}>
                                                     <div className="flex flex-row items-center">
                                                         {progress && <Spinner className="me-3" width={16} height={16} color={spinnerColor} />}
                                                         <TrashIcon className="sm:hidden size-6"/>
